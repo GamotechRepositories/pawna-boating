@@ -1,0 +1,105 @@
+{
+  "brand": "Paluma",
+  "theme": "Nature Adventure",
+  "colors": {
+    "primary": {
+      "name": "Sunset Orange",
+      "hex": "#F59E0B"
+    },
+    "secondary": {
+      "name": "Adventure Gold",
+      "hex": "#FFC107"
+    },
+    "jungle": {
+      "name": "Jungle Green",
+      "hex": "#087F5B"
+    },
+    "mountain": {
+      "name": "Mountain Brown",
+      "hex": "#4B2E1F"
+    },
+    "river": {
+      "name": "River Blue",
+      "hex": "#62CBE3"
+    },
+    "background": {
+      "name": "Warm White",
+      "hex": "#FFFDF7"
+    },
+    "text": {
+      "name": "Forest Charcoal",
+      "hex": "#202820"
+    },
+    "surface": {
+      "name": "Pure White",
+      "hex": "#FFFFFF"
+    },
+    "surfaceBlue": {
+      "name": "Pale River Blue",
+      "hex": "#E5F8FC"
+    },
+    "border": {
+      "name": "Soft Sand",
+      "hex": "#E7E2D8"
+    },
+    "primaryHover": {
+      "name": "Deep Orange",
+      "hex": "#D97706"
+    }
+  },
+  "websiteUsage": {
+    "header": "#4B2E1F",
+    "footer": "#202820",
+    "pageBackground": "#FFFDF7",
+    "cardBackground": "#FFFFFF",
+    "primaryButton": "#F59E0B",
+    "secondaryButton": "#087F5B",
+    "headings": "#4B2E1F",
+    "bodyText": "#202820",
+    "links": "#087F5B",
+    "bookingHighlights": "#FFC107",
+    "riverSections": "#E5F8FC",
+    "borders": "#E7E2D8"
+  },
+  
+  "buttons": {
+    "primary": {
+      "background": "#F59E0B",
+      "text": "#202820",
+      "hoverBackground": "#D97706",
+      "hoverText": "#FFFFFF",
+      "border": "none",
+      "borderRadius": "8px"
+    },
+    "secondary": {
+      "background": "#087F5B",
+      "text": "#FFFFFF",
+      "hoverBackground": "#066649",
+      "hoverText": "#FFFFFF",
+      "border": "none",
+      "borderRadius": "8px"
+    },
+    "outline": {
+      "background": "transparent",
+      "text": "#087F5B",
+      "hoverBackground": "#E5F8FC",
+      "hoverText": "#066649",
+      "border": "1px solid #087F5B",
+      "borderRadius": "8px"
+    },
+    "booking": {
+      "background": "#FFC107",
+      "text": "#4B2E1F",
+      "hoverBackground": "#F59E0B",
+      "hoverText": "#202820",
+      "border": "none",
+      "borderRadius": "8px"
+    },
+    "disabled": {
+      "background": "#E7E2D8",
+      "text": "#777777",
+      "border": "none",
+      "borderRadius": "8px"
+    }
+  }
+}
