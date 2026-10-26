@@ -15,18 +15,20 @@ export default function ExperiencesPage() {
         title="Follow your sense of adventure."
         description="On the water, in the pool, or around the games board — there’s more than one way to spend a good day together."
       />
-      <div className="mb-8 flex flex-wrap justify-center gap-3" aria-label="Filter experiences">
+      <div className="experience-filters" aria-label="Filter experiences">
         {['All', 'Water', 'Games', 'Family'].map(category => <button
           key={category}
           type="button"
           aria-pressed={filter === category}
           onClick={() => setFilter(category)}
-          className={`min-h-11 rounded-full border px-6 text-sm transition-colors ${filter === category ? 'border-jungle bg-jungle text-white' : 'border-sand bg-white hover:border-jungle'}`}
+          className={`experience-filter min-h-11 rounded-full border transition-colors ${filter === category ? 'border-jungle bg-jungle text-white' : 'border-sand bg-white hover:border-jungle'}`}
         >{category === 'All' ? 'All experiences' : category}</button>)}
       </div>
-      <ExperienceCarousel key={filter} items={visible} />
+      <div className="-mx-5 sm:mx-0">
+        <ExperienceCarousel key={filter} items={visible} />
+      </div>
       <div className="mt-12 flex flex-wrap items-center justify-between gap-6 rounded-xl bg-river-surface p-8">
-        <p className="max-w-xl text-sm leading-7">Ask the camp about activity availability, timings, safety guidance, and any additional charges. Children need adult supervision around pools and water.</p>
+        <p className="max-w-xl text-[13px] sm:text-sm leading-6 sm:leading-7">Ask the camp about activity availability, timings, safety guidance, and any additional charges. Children need adult supervision around pools and water.</p>
         <Button href="/plan-your-visit">Plan a day outdoors</Button>
       </div>
     </section>

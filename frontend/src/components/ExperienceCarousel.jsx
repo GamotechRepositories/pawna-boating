@@ -50,7 +50,7 @@ export default function ExperienceCarousel({ items }) {
       </div>
       <div className="mt-4 flex items-center justify-center gap-5 sm:gap-8">
         <button type="button" onClick={() => move(-1)} disabled={!hasNeighbors} aria-label="Previous experience" className="flex size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon className="size-5 rotate-180" /></button>
-        <p aria-live="polite" aria-atomic="true" className="min-w-28 text-center text-sm font-semibold text-mountain">{String(index + 1).padStart(2, '0')} <span className="mx-2 font-normal text-forest/50">/</span> {String(items.length).padStart(2, '0')}</p>
+        <p aria-live="polite" aria-atomic="true" className="min-w-28 text-center text-[13px] sm:text-sm font-semibold text-mountain">{String(index + 1).padStart(2, '0')} <span className="mx-2 font-normal text-forest/50">/</span> {String(items.length).padStart(2, '0')}</p>
         <button type="button" onClick={() => move(1)} disabled={!hasNeighbors} aria-label="Next experience" className="flex size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon /></button>
       </div>
     </div>

@@ -15,7 +15,7 @@
   --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
 }
 @layer base {
-  body { @apply m-0 bg-warm font-sans text-forest antialiased; }
+  body { @apply m-0 bg-warm font-sans text-sm sm:text-base text-forest antialiased; }
   button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   button, a { touch-action: manipulation; }
   button { cursor: pointer; }
@@ -24,10 +24,10 @@
 }
 @layer components {
   .page-width { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12; }
-  .eyebrow { @apply mb-4 text-xs font-bold uppercase tracking-[.18em] text-jungle; }
-  .section-title { @apply font-display text-4xl leading-[1.15] tracking-tight text-mountain md:text-5xl; text-wrap: balance; }
-  .text-link { @apply inline-flex min-h-11 items-center gap-3 text-sm font-semibold text-jungle hover:underline; }
-  .field-label { @apply flex flex-col gap-2 text-sm font-semibold text-mountain; }
+  .eyebrow { @apply mb-4 text-[10px] sm:text-xs font-bold uppercase tracking-[.18em] text-jungle; }
+  .section-title { @apply font-display text-[28px] sm:text-4xl leading-[1.15] tracking-tight text-mountain md:text-5xl; text-wrap: balance; }
+  .text-link { @apply inline-flex min-h-11 items-center gap-3 text-[13px] sm:text-sm font-semibold text-jungle hover:underline; }
+  .field-label { @apply flex flex-col gap-2 text-[13px] sm:text-sm font-semibold text-mountain; }
   .field-label input, .field-label select, .field-label textarea { @apply min-h-12 w-full rounded-lg border border-sand bg-warm px-4 py-3 font-sans text-base font-normal text-forest; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -35,6 +35,17 @@
 }
 
 @layer components {
+  .experience-filters {
+    @apply mx-auto mb-8 grid w-full max-w-lg;
+    container-type: inline-size;
+    grid-template-columns: minmax(0, 1.8fr) repeat(3, minmax(0, 1fr));
+    gap: clamp(.25rem, 1vw, .75rem);
+  }
+  .experience-filter {
+    @apply min-w-0 whitespace-nowrap;
+    font-size: min(.875rem, 4cqi);
+    padding-inline: min(1.5rem, 2cqi);
+  }
   .experience-stage {
     /* One complete card plus 30% of a card on either side, with two gaps. */
     --experience-card-width: calc((100% - 1.5rem) / 1.6);
@@ -57,7 +68,7 @@
   .experience-slide-next:hover .experience-preview,
   .experience-slide-previous:focus-visible .experience-preview,
   .experience-slide-next:focus-visible .experience-preview { @apply opacity-80 blur-none; }
-  .experience-card { @apply flex h-full min-h-[390px] select-none flex-col rounded-2xl border border-sand bg-white p-5 sm:min-h-[420px] sm:p-8; }
+  .experience-card { @apply flex h-full min-h-[320px] select-none flex-col rounded-2xl border border-sand bg-white p-3 sm:min-h-[420px] sm:p-8; }
   .experience-card-active { @apply border-jungle/30 shadow-lg shadow-jungle/10; }
 }
 @media (min-width: 1024px) {
@@ -68,4 +79,23 @@
   }
   .experience-slide-previous { transform: translateX(calc(-100% - var(--experience-gap))) scale(.93); }
   .experience-slide-next { transform: translateX(calc(100% + var(--experience-gap))) scale(.93); }
+}
+
+@keyframes highlights-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@layer components {
+  .highlights-track {
+    @apply flex w-max;
+    animation: highlights-scroll 24s linear infinite;
+  }
+  .highlights-strip:hover .highlights-track,
+  .highlights-strip:focus-within .highlights-track {
+    animation-play-state: paused;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .highlights-track { animation: none !important; }
+  .highlights-track > [aria-hidden='true'] { display: none; }
 }
