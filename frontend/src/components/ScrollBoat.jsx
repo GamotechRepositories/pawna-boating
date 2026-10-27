@@ -29,7 +29,8 @@ export default function ScrollBoat() {
         fillRef.current.setAttribute('d', `${currentPath} L1440 220 H0 Z`)
       }
       const length = path.getTotalLength()
-      const distance = 55 + progress * (length - 110)
+      const edgeInset = 90
+      const distance = edgeInset + progress * (length - edgeInset * 2)
       const point = path.getPointAtLength(distance)
       const before = path.getPointAtLength(distance - 1)
       const after = path.getPointAtLength(distance + 1)
@@ -61,16 +62,17 @@ export default function ScrollBoat() {
   return (
     <div aria-hidden="true" className="pointer-events-none mb-2 w-full overflow-hidden">
       <div ref={trackRef}>
-        <svg viewBox="0 0 1440 220" className="block h-auto min-h-28 w-full bg-warm" preserveAspectRatio="none" fill="none">
+        <svg viewBox="0 -80 1440 300" className="block h-auto min-h-28 w-full bg-warm" preserveAspectRatio="none" fill="none">
           <path ref={fillRef} d={`${wavePath} L1440 220 H0 Z`} fill="#0B59BE" />
           <path ref={pathRef} d={wavePath} />
           <g ref={boatRef}>
-            <ellipse cx="0" cy="3" rx="35" ry="3" fill="#063F8B" opacity=".2" />
+            <g transform="scale(1.6)">
             <path d="M-35-23 Q-32-12-22-13 L22-13 Q33-14 36-25 L40-22 Q38-2 18-1 H-20 Q-37-2-40-22Z" fill="#F5AA16" />
             <path d="M-35-18 Q0-10 35-18" stroke="#FFD675" strokeWidth="3" strokeLinecap="round" />
             <path d="M-15-15 L-19-35 Q-6-30-7-15Z" fill="#B7DED5" />
             <path d="M10-15 L6-35 Q19-30 18-15Z" fill="#B7DED5" />
             <path d="M-25-7H25" stroke="#D78B0B" strokeWidth="2" strokeLinecap="round" />
+            </g>
           </g>
         </svg>
       </div>
