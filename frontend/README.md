@@ -1,5 +1,33 @@
 # React + Vite
 
+## Video gallery
+
+Import `VideoGallery` into any page and supply your video files:
+
+```jsx
+import VideoGallery from '../components/VideoGallery'
+
+<VideoGallery videos={[
+  {
+    id: 'getaway',
+    src: '/videos/getaway.mp4',
+    title: 'A day outdoors',
+    description: 'A glimpse of your next getaway.',
+    poster: '/videos/getaway.jpg',
+    duration: '0:45',
+    captions: [
+      { src: '/videos/getaway.en.vtt', srcLang: 'en', label: 'English', default: true },
+    ],
+  },
+]} />
+```
+
+Place these assets in `public/videos/`, or use hosted media URLs. Each video
+needs a unique `id`, `src`, and `title`; other fields are optional. `duration` is
+a display label. You can also override `eyebrow`, `title`, and `description` on
+the gallery. Videos load on demand and playback uses native browser controls.
+The component shows an empty state until videos are supplied.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

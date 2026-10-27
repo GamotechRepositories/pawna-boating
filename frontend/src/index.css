@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+@layer components {
+  .hanging-carousel { position: relative; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .hanging-carousel::-webkit-scrollbar { display: none; }
+  .hanging-slide { flex: 0 0 100%; min-width: 0; display: flex; justify-content: center; align-items: start; padding: 2.5rem 1.5rem 2rem; scroll-snap-align: start; }
+  @media (min-width: 1024px) { .hanging-slide { flex-basis: 33.333333%; } }
+  .photo-rope { position: absolute; top: 0; left: -5%; width: 110%; height: 4rem; filter: drop-shadow(0 3px 2px #0003); }
+  .hanging-photo { position: relative; align-self: start; justify-self: center; width: 100%; max-width: 320px; margin: 0; padding: clamp(.25rem, .8vw, .65rem); background: #fffdf7; transform: rotate(var(--photo-angle)); box-shadow: 0 12px 24px #0005; }
+  .photo-peg { position: absolute; z-index: 1; top: -1.7rem; left: calc(50% - .4rem); width: .8rem; height: 2.6rem; border: 1px solid #a38154; border-radius: 2px; background: linear-gradient(90deg, #bd9b6b, #e7cfa6 45%, #b68f5f 50%, #d3b58a); box-shadow: 2px 3px 3px #0003; }
+}
+
 @theme inline {
   --color-primary: var(--brand-primary, #F59E0B);
   --color-secondary: var(--brand-secondary, #FFC107);

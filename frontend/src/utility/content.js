@@ -1,7 +1,9 @@
+import campingImage from '../assets/camping.png'
+
 export const brand = 'Paluma'
 export const photos = {
   hero: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2200&q=85',
-  camping: 'https://images.unsplash.com/photo-1478131143081-fd1d858f1f1c?auto=format&fit=crop&w=900&q=85',
+  camping: campingImage,
   container: 'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=900&q=85',
   villa: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=85',
   glamping: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=900&q=85',
