@@ -28,7 +28,7 @@ export default function ImageCarousel({ images, className = '' }) {
             aria-label={`Bring image ${slideIndex + 1} to front: ${image.alt}`}
             aria-pressed={isFront}
             onClick={() => setIndex(slideIndex)}
-            className={`col-start-1 row-start-1 w-[76%] self-center overflow-hidden rounded-2xl border-4 border-white bg-white text-left shadow-xl transition-transform duration-500 motion-reduce:transition-none ${isFront ? 'relative z-10 justify-self-end translate-y-3 rotate-[4deg]' : 'relative z-0 justify-self-start -translate-y-2 -rotate-[4deg] hover:-translate-y-4'}`}
+            className={`col-start-1 row-start-1 w-[76%] self-center overflow-hidden rounded-2xl border-4 border-white bg-white text-left shadow-xl transition-transform duration-1000 ease-in-out motion-reduce:transition-none ${isFront ? 'relative z-10 justify-self-end translate-y-3 rotate-[4deg]' : 'relative z-0 justify-self-start -translate-y-2 -rotate-[4deg] hover:-translate-y-4'}`}
           >
             <img src={image.src} alt={image.alt} loading="lazy" className="block aspect-[4/5] w-full object-contain" />
           </button>

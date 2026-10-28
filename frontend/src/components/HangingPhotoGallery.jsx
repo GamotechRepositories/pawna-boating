@@ -14,7 +14,7 @@ export default function HangingPhotoGallery({ images, backgroundImage }) {
     track.scrollTo({ left: target, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
   }
   return (
-    <section className="w-full pb-16 md:pb-24" aria-label="Moments from the getaway">
+    <section className="w-full" aria-label="Moments from the getaway">
       <div className="relative isolate w-full overflow-hidden bg-forest px-5 pb-12 pt-8 sm:px-10 sm:py-14">
         <img src={backgroundImage} alt="" loading="lazy" className="absolute inset-0 -z-20 size-full scale-110 object-cover blur-sm" />
         <div className="absolute inset-0 -z-10 bg-forest/65" />

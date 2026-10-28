@@ -1,3 +1,4 @@
+import { MotionConfig } from 'motion/react'
 import { useEffect } from 'react'
 import Layout from './components/Layout'
 import AppRoutes from './routes/AppRoutes'
@@ -10,5 +11,5 @@ export default function App() {
     applyTheme()
     document.title = `${getRoute(path).title} | Paluma`
   }, [path])
-  return <Layout path={path}><AppRoutes path={path} /></Layout>
+  return <MotionConfig reducedMotion="user"><Layout path={path}><AppRoutes path={path} /></Layout></MotionConfig>
 }

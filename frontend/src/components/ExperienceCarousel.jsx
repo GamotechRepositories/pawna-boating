@@ -1,8 +1,10 @@
+import { motion as Motion, useReducedMotion } from 'motion/react'
 import ExperienceCard from './ExperienceCard'
 import Icon from './Icon'
 import useExperienceCarousel from '../controllers/useExperienceCarousel'
 
 export default function ExperienceCarousel({ items }) {
+  const reducedMotion = useReducedMotion()
   const { index, move, gestureHandlers } = useExperienceCarousel(items)
   if (!items.length) return <p>No experiences in this category.</p>
   const previous = (index - 1 + items.length) % items.length
@@ -37,7 +39,15 @@ export default function ExperienceCarousel({ items }) {
           aria-roledescription="slide"
           aria-label={`${index + 1} of ${items.length}: ${items[index].name}`}
         >
-          <ExperienceCard activity={items[index]} active />
+          <Motion.div
+            key={items[index].name}
+            className="h-full"
+            initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <ExperienceCard activity={items[index]} active />
+          </Motion.div>
         </article>
         {hasNeighbors && <button
           type="button"

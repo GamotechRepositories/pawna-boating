@@ -26,4 +26,4 @@ export const activities = [
   { name: 'Chess', category: 'Games', icon: 'chess', description: 'Take your time. Your next move can wait.' },
   { name: 'Kids play area', category: 'Family', icon: 'sun', description: 'A space for little explorers to play and make their own memories.' },
 ]
-export const navigation = [{ path: '/', label: 'Home' }, { path: '/stays', label: 'Our stays' }, { path: '/experiences', label: 'Experiences' }, { path: '/plan-your-visit', label: 'Plan your visit' }]
+export const navigation = [{ path: '/', label: 'Home' }, { path: '/stays', label: 'Our stays' }, { path: '/experiences', label: 'Experiences' }, { path: '/video-gallery', label: 'Video gallery' }, { path: '/plan-your-visit', label: 'Plan your visit' }]
