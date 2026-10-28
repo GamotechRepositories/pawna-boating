@@ -1,12 +1,14 @@
-import campingImage from '../assets/camping.png'
+import villaImage from '../assets/villa.png'
+import tentsImage from '../assets/tents.png'
+import containerImage from '../assets/Container.png'
 
 export const brand = 'Paluma'
 export const photos = {
   hero: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=2200&q=85',
-  camping: campingImage,
-  container: 'https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=900&q=85',
-  villa: 'https://images.unsplash.com/photo-1449844908441-8829872d2607?auto=format&fit=crop&w=900&q=85',
-  glamping: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=900&q=85',
+  camping: tentsImage,
+  container: containerImage,
+  villa: villaImage,
+  glamping: tentsImage,
   boating: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85',
 }
 export const stays = [

@@ -1,0 +1,218 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pay CCC23423423434 — YEEDIPAY</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"><link rel="icon" type="image/png" href="/customer/public/assets/favicon.png"><link rel="stylesheet" href="/customer/public/assets/app.css"><link rel="stylesheet" href="/customer/public/assets/brand.css"><link rel="stylesheet" href="/customer/public/assets/responsive.css"></head><body class="pay-dark"><div class="wrap"><p class="brand-lockup"><img src="/image/yeedi.png" alt="YEEDI Payment Solution Limited"></p><div class="pay-public-layout"><div class="pay-stage"><aside class="pay-steps" role="note"><h2 class="pay-side-title">Steps</h2><button type="button" class="pay-steps-icon" id="paySoundBtn" aria-pressed="false" aria-label="Play payment guide"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="#fff" d="M3 10v4h3l5 4V6L6 10H3zm13.5 2a4.5 4.5 0 0 0-2.2-3.9v7.8A4.5 4.5 0 0 0 16.5 12zM14 4.2v2.1a7 7 0 0 1 0 11.4v2.1a9 9 0 0 0 0-15.6z"/></svg>
+    </button><span><b>Step 1:</b> Enter amount</span><span><b>Step 2:</b> Generate QR</span><span><b>Step 3:</b> Scan and pay</span><span><b>Step 4:</b> Click I Have Paid</span></aside><div class="pay-stage-main"><div class="pay"><div class="row"><div class="pay-who grow">uncle test 10<div>CCC23423423434</div></div>
+            </div><form method="post" action="/p/CCC23423423434/start" id="payForm"><input type="hidden" name="_csrf" value="0706d1d8e7ff2ed6d4ccc5f60730a7b3e19ea315e48ede55da2f96179429e41a"><input type="hidden" name="amount_mode" id="amtMode" value="preset"><h1 class="pay-title" style="font-size:1.35rem;margin:8px 0 4px">Make Payment</h1><label class="pay-lab">Enter Amount (₹)
+            <input name="amount" id="amtVal" inputmode="decimal" required value="100" placeholder="500" autocomplete="off">
+        </label><div class="pay-inr">INR <span id="amtShow">100.00</span></div><div class="pay-chips" id="payChips"><button type="button" class="pay-chip on" data-amt="100" >₹100</button><button type="button" class="pay-chip" data-amt="500" >₹500</button><button type="button" class="pay-chip" data-amt="1000" >₹1000</button><button type="button" class="pay-chip" data-amt="2000" >₹2000</button><button type="button" class="pay-chip" data-amt="5000" >₹5000</button><button type="button" class="pay-chip" data-amt="10000" >₹10000</button><button type="button" class="pay-chip" data-amt="25000" >₹25000</button><button type="button" class="pay-chip" data-amt="50000" >₹50000</button></div><button type="submit" class="pay-go">Generate QR</button></form>
+            </div><style>
+.pay-video{display:block;width:100%;margin:14px 0 0;border-radius:12px;background:#000}
+.pay-video-note{margin:12px 0 0;color:#171719;font-weight:700;line-height:1.45;text-align:center}
+</style><script>
+(function(){
+  var show=document.getElementById('amtShow'), hid=document.getElementById('amtVal'), mode=document.getElementById('amtMode');
+  function paint(n){
+    var v=String(n).replace(/,/g,'');
+    hid.value=v;
+    var num=Number(v);
+    show.textContent=isFinite(num)&&v!==''?num.toFixed(2):'0.00';
+  }
+  hid.addEventListener('input', function(){
+    paint(hid.value);
+    if(mode) mode.value='manual';
+    document.querySelectorAll('.pay-chip').forEach(function(x){ x.classList.remove('on'); });
+  });
+  document.querySelectorAll('.pay-chip').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(btn.disabled) return;
+      document.querySelectorAll('.pay-chip').forEach(function(x){ x.classList.remove('on'); });
+      btn.classList.add('on');
+      if(mode) mode.value='preset';
+      paint(btn.getAttribute('data-amt'));
+    });
+  });
+  var paidBtn=document.getElementById('paidBtn');
+  var ackUrl="";
+  var statusUrl="";
+  var cancelUrl="";
+  var resultUrl="";
+  var homeUrl="\/p\/CCC23423423434";
+  var sellerNext="";
+  var csrf="0706d1d8e7ff2ed6d4ccc5f60730a7b3e19ea315e48ede55da2f96179429e41a";
+  var paidMsg=document.getElementById('paidMsg');
+  var successBox=document.getElementById('successPopup');
+  var verifyBox=document.getElementById('verifyOverlay');
+  var receiptPdf="";
+  var receiptPrint="";
+  var receiptRef="";
+  var pollTimer=null;
+  var checking=paidBtn && paidBtn.getAttribute('data-acked')==='1';
+  var finished=false;
+  function stopPoll(){if(pollTimer){clearInterval(pollTimer);pollTimer=null;}}
+  function openWebsite(target){
+    var next=target || resultUrl || homeUrl;
+    if(next) location.replace(next);
+  }
+  function showSuccess(d){
+    if(finished) return;
+    finished=true;
+    stopPoll();
+    if(verifyBox) verifyBox.classList.remove('on');
+    if(paidBtn){paidBtn.textContent='PAID';paidBtn.disabled=true;}
+    if(sellerNext){
+      var ref=String((d && d.reference) || '');
+      location.replace(sellerNext + (ref ? ('?receipt=' + encodeURIComponent(ref)) : ''));
+      return;
+    }
+    if(d){
+      var amtEl=document.getElementById('popAmount');
+      var refEl=document.getElementById('popRef');
+      var utrRow=document.getElementById('popUtr');
+      var utrVal=document.getElementById('popUtrVal');
+      if(amtEl && d.amount) amtEl.textContent=d.amount;
+      if(refEl && d.reference) refEl.textContent=d.reference;
+      if(utrRow && utrVal && d.utr){utrVal.textContent=d.utr;utrRow.style.display='block';}
+    }
+    if(successBox) successBox.classList.add('on');
+    if(d && d.status==='SUCCESS' && d.receipt===true && d.outcome==='paid' && window.yeediIssueReceipt && receiptPdf){
+      window.yeediIssueReceipt(receiptPdf, receiptPrint, d.reference || receiptRef);
+    }
+  }
+  function closedLabel(d){
+    var code=String(d.outcome||'');
+    if(code==='expired') return 'Session Expired';
+    if(code==='cancelled') return 'Payment Cancelled';
+    if(code==='failed') return 'Payment Failed';
+    var status=String(d.status||'').toUpperCase();
+    if(status==='EXPIRED') return 'Session Expired';
+    if(status==='FAILED') return 'Payment Failed';
+    return '';
+  }
+  function showClosed(d){
+    var label=closedLabel(d);
+    if(!label) return false;
+    finished=true;
+    stopPoll();
+    if(paidBtn){paidBtn.textContent=label;paidBtn.disabled=true;}
+    if(paidMsg) paidMsg.textContent=label;
+    openWebsite(resultUrl);
+    return true;
+  }
+  function applyServer(d){
+    if(!d) return;
+    var status=String(d.status||'').toUpperCase();
+    var view=String(d.view||'');
+    if(showClosed(d)) return;
+    if(paidMsg && d.customer_message) paidMsg.textContent=d.customer_message;
+    if(status==='SUCCESS' && d.outcome==='paid'){showSuccess(d);return;}
+    if(!checking || !paidBtn) return;
+    paidBtn.disabled=true;
+    if(verifyBox && (!successBox || !successBox.classList.contains('on'))) verifyBox.classList.add('on');
+    if(view==='review'){paidBtn.textContent='UNDER VERIFICATION'; if(verifyBox) verifyBox.classList.remove('on');}
+    else {paidBtn.textContent='CHECKING SERVER…';}
+  }
+  async function poll(){
+    if(!statusUrl || finished) return;
+    try{
+      var r=await fetch(statusUrl,{cache:'no-store'});
+      applyServer(await r.json());
+    }catch(e){}
+  }
+  function watchServer(){
+    poll();
+    if(!pollTimer) pollTimer=setInterval(poll,3000);
+  }
+  if(statusUrl && paidBtn){
+    watchServer();
+    paidBtn.addEventListener('click', async function(){
+      if(paidBtn.disabled || finished) return;
+      checking=true;
+      paidBtn.disabled=true;
+      paidBtn.textContent='CHECKING SERVER…';
+      try{
+        var body=new URLSearchParams();
+        body.set('_csrf', csrf);
+        var r=await fetch(ackUrl,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString(),cache:'no-store'});
+        applyServer(await r.json());
+      }catch(e){}
+      watchServer();
+    });
+  }
+  var cancelBtn=document.getElementById('cancelBtn');
+  if(cancelBtn && cancelUrl){
+    cancelBtn.addEventListener('click', async function(){
+      if(finished) return;
+      cancelBtn.disabled=true;
+      if(paidBtn) paidBtn.disabled=true;
+      try{
+        var body=new URLSearchParams();
+        body.set('_csrf', csrf);
+        var r=await fetch(cancelUrl,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:body.toString(),cache:'no-store'});
+        applyServer(await r.json());
+      }catch(e){
+        cancelBtn.disabled=false;
+      }
+    });
+  }
+  var popOk=document.getElementById('popOk');
+  if(popOk) popOk.addEventListener('click', function(){ openWebsite(resultUrl); });
+  if(checking && verifyBox) verifyBox.classList.add('on');
+  var copy=document.getElementById('copyVpa');
+  if(copy){
+    copy.addEventListener('click', function(){
+      var v=copy.getAttribute('data-vpa')||'';
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(v); }
+      else { var t=document.createElement('textarea'); t.value=v; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+      copy.textContent='COPIED';
+      setTimeout(function(){ copy.textContent='COPY UPI ID'; }, 1600);
+    });
+  }
+})();
+</script></div><aside class="pay-side"><h2 class="pay-side-title">Video guideline</h2><video class="pay-video" controls playsinline preload="metadata" src="/video/WhatsApp%20Video%202026-10-01%20at%204.35.13%20PM.mp4"></video><p class="pay-video-note">Make a direct payment and never take a screenshot. It does not support.</p></aside></div><section class="yp-merchant-support" aria-labelledby="yp-support-heading"><div class="yp-merchant-support-inner"><p class="yp-merchant-support-kicker">Any Issues? Contact Support</p><h2 id="yp-support-heading" class="yp-merchant-support-title">Any Issues? Contact Us — Resolved Within 1 Hour</h2><p class="yp-merchant-support-lead">Our support team aims to resolve your issues within 1 hour. Contact us through WhatsApp or email for assistance.</p><div class="yp-merchant-support-grid"><div class="yp-merchant-support-item"><div class="yp-merchant-support-icon yp-merchant-support-icon-wa" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.435 9.884-9.881 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+                </div><h3>WhatsApp Support</h3><p class="yp-merchant-support-detail">+66 64 258 4053</p><a class="yp-merchant-support-btn yp-merchant-support-btn-wa" href="https://wa.me/66642584053?text=Hello%20YEEDIPAY%20Support%2C%20I%20need%20help%20with%20my%20merchant%20account.%20Merchant%20ID%3A%20CCC23423423434." target="_blank" rel="noopener noreferrer">Contact on WhatsApp</a></div><div class="yp-merchant-support-item"><div class="yp-merchant-support-icon yp-merchant-support-icon-mail" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>
+                </div><h3>Email Support</h3><p class="yp-merchant-support-detail">support@yeedipay.in</p><a class="yp-merchant-support-btn yp-merchant-support-btn-mail" href="mailto:support@yeedipay.in">Email Support</a></div>
+        </div>
+    </div>
+</section>
+</div><script>
+(function(){
+  var btn=document.getElementById('paySoundBtn');
+  if(!btn) return;
+  var video=document.querySelector('.pay-video');
+  function setPlaying(on){
+    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    btn.setAttribute('aria-label', on ? 'Stop payment guide' : 'Play payment guide');
+  }
+  if(video){
+    video.addEventListener('play', function(){ setPlaying(true); });
+    video.addEventListener('pause', function(){ setPlaying(false); });
+    video.addEventListener('ended', function(){ setPlaying(false); });
+    btn.addEventListener('click', function(){
+      if(!video.paused && !video.ended){ video.pause(); return; }
+      video.muted=false;
+      video.volume=1;
+      var play=video.play();
+      if(play && play.catch) play.catch(function(){ setPlaying(false); });
+    });
+    return;
+  }
+  var playing=false;
+  var steps='Step 1: Enter amount. Step 2: Generate QR. Step 3: Scan and pay. Step 4: Click I Have Paid.';
+  btn.addEventListener('click', function(){
+    if(playing){
+      playing=false;
+      if(window.speechSynthesis) speechSynthesis.cancel();
+      setPlaying(false);
+      return;
+    }
+    playing=true;
+    setPlaying(true);
+    if(!window.speechSynthesis){ playing=false; setPlaying(false); return; }
+    var voice=new SpeechSynthesisUtterance(steps);
+    voice.lang='en-IN';
+    voice.rate=0.95;
+    voice.onend=function(){ playing=false; setPlaying(false); };
+    voice.onerror=function(){ playing=false; setPlaying(false); };
+    speechSynthesis.cancel();
+    speechSynthesis.speak(voice);
+  });
+})();
+</script></div></body></html>

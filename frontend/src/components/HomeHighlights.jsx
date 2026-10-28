@@ -1,39 +1,51 @@
-import Icon from './Icon'
+import { useId, useRef } from 'react'
+import { useReducedMotion } from 'motion/react'
 
 const highlights = [
-  { icon: 'tent', label: 'Stay a little longer' },
-  { icon: 'boat', label: 'Take the scenic route' },
-  { icon: 'play', label: 'Play without a clock' },
-  { icon: 'leaf', label: 'Come closer to nature' },
+  'Stay a little longer',
+  'Take the scenic route',
+  'Play without a clock',
+  'Come closer to nature',
 ]
+const ribbonText = `${highlights.join('   •   ')}   •   `
 
 export default function HomeHighlights() {
+  const pathId = useId()
+  const ribbonRef = useRef(null)
+  const reducedMotion = useReducedMotion()
+  const pause = () => ribbonRef.current?.querySelectorAll('svg').forEach(svg => svg.pauseAnimations())
+  const resume = () => {
+    if (!ribbonRef.current?.matches(':hover, :focus-within')) {
+      ribbonRef.current?.querySelectorAll('svg').forEach(svg => svg.unpauseAnimations())
+    }
+  }
+
   return (
-    <section aria-label="Camp highlights" className="border-b border-sand bg-surface">
-      <div className="highlights-strip flex items-center gap-3 px-3 py-5 sm:hidden">
-        <div className="min-w-0 flex-1 overflow-x-auto" tabIndex={0} role="region" aria-label="Scrolling camp highlights">
-          <div className="highlights-track">
-            {[false, true].map(duplicate => (
-              <ul key={String(duplicate)} aria-hidden={duplicate || undefined} className="flex shrink-0 items-center gap-8 pr-8">
-                {highlights.map(item => (
-                  <li key={item.label} className="flex shrink-0 items-center gap-3 whitespace-nowrap text-[13px] font-medium text-mountain">
-                    <Icon name={item.icon} className="size-6 shrink-0 text-jungle" />
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
+    <section
+      ref={ribbonRef}
+      aria-label="Camp highlights"
+      className="highlights-strip highlights-ribbon"
+      tabIndex={0}
+      onMouseEnter={pause}
+      onMouseLeave={resume}
+      onFocus={pause}
+      onBlur={resume}
+    >
+      <p className="sr-only">{highlights.join('. ')}.</p>
+      {[false, true].map(mobile => <svg key={String(mobile)} aria-hidden="true" className={`highlights-flow ${mobile ? 'highlights-flow-mobile' : 'highlights-flow-desktop'}`} viewBox={mobile ? '0 0 720 140' : '0 0 1440 140'} preserveAspectRatio="none">
+        <defs>
+          <path id={`${pathId}-${mobile}`} d="M-1440 70 C-1200 34 -960 34 -720 70 S-240 106 0 70 S480 34 720 70 S1200 106 1440 70 S1920 34 2160 70 S2640 106 2880 70 S3360 34 3600 70 S4080 106 4320 70 S4800 34 5040 70 S5520 106 5760 70" />
+        </defs>
+        <use href={`#${pathId}-${mobile}`} className="highlights-band" />
+        <text className="highlights-flow-text" dominantBaseline="middle">
+          <textPath href={`#${pathId}-${mobile}`} startOffset="0">
+            {!reducedMotion && <animate attributeName="startOffset" from="0" to="-1440" dur="55s" repeatCount="indefinite" />}
+            {Array.from({ length: 5 }, (_, index) => (
+              <tspan key={index} textLength="1440" lengthAdjust="spacing">{ribbonText}</tspan>
             ))}
-          </div>
-        </div>
-      </div>
-      <ul className="page-width hidden grid-cols-2 gap-7 py-8 sm:grid md:grid-cols-4">
-        {highlights.map(item => (
-          <li key={item.label} className="flex items-center justify-center gap-3 text-sm font-medium text-mountain">
-            <Icon name={item.icon} className="size-7 shrink-0 text-jungle" />
-            {item.label}
-          </li>
-        ))}
-      </ul>
+          </textPath>
+        </text>
+      </svg>)}
     </section>
   )
 }

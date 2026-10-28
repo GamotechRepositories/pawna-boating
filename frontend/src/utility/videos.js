@@ -1,3 +1,4 @@
+import promotionalVideo from '../assets/promotional.mp4'
 import funVideo from '../assets/FunV.mp4'
 import lakeVideo from '../assets/LakeV.mp4'
 import getawayVideo from '../assets/MixV.mp4'
@@ -6,6 +7,12 @@ import poolVideo from '../assets/PoolV.mp4'
 import getawayPoster from '../assets/home.png'
 
 export const getawayVideos = [
+  {
+    id: 'pawna-promotional',
+    src: promotionalVideo,
+    title: 'Your next escape',
+    description: 'Discover Pawna and find inspiration for your next getaway.',
+  },
   {
     id: 'pawna-fun',
     src: funVideo,
