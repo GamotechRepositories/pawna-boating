@@ -33,5 +33,5 @@ export default function HomePage() {
     eyebrow="The getaway, in motion"
     title="A little closer to being here."
     description="Press play for a glimpse of Pawna. Your next outdoor escape starts with a little inspiration."
-  /><section className="page-width py-20"><Reveal className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-mountain px-8 py-12 text-white md:px-14"><div><p className="mb-3 text-xs uppercase tracking-[.2em] text-secondary">Collect moments, together</p><h2 className="font-display text-3xl sm:text-4xl md:text-5xl">Your out-of-office starts here.</h2><p className="mt-4 text-white/75">Bring your people. We’ll help you find your kind of escape.</p></div><Button href="/plan-your-visit">Let’s plan your visit</Button></Reveal></section></>
+  /></>
 }
