@@ -26,6 +26,7 @@
   --font-display: 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif;
 }
 @layer base {
+  h1, h2, h3, h4, h5, h6 { @apply font-display capitalize; }
   body { @apply m-0 bg-warm font-sans text-sm sm:text-base text-forest antialiased; }
   button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
   button, a { touch-action: manipulation; }

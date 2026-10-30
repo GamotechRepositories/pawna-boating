@@ -20,7 +20,7 @@ export default function HangingPhotoGallery({ images, backgroundImage }) {
         <div className="absolute inset-0 -z-10 bg-forest/65" />
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
           <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-secondary">A glimpse of the getaway</p>
-          <h2 className="font-display text-[28px] leading-[1.15] tracking-tight text-white sm:text-4xl md:text-5xl">See the moments. Feel the escape.</h2>
+          <h2 className="section-title text-white">See the moments. Feel the escape.</h2>
           <p className="mt-4 leading-7 text-white/85">Little adventures. Favourite people. Memories worth holding on to.</p>
         </div>
         <div role="region" aria-roledescription="carousel" aria-label="Getaway photos" className="relative">

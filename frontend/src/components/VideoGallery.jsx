@@ -53,7 +53,7 @@ export default function VideoGallery({
   return (
     <section aria-labelledby={headingId} className={`video-gallery bg-turmeric ${spacing}`}>
       <div className="page-width relative pt-6 md:pt-10">
-        <div id={headingId}>
+        <div id={headingId} className="text-center [&>div]:justify-center">
           <SectionHeading eyebrow={eyebrow} title={title} description={description} />
         </div>
         {availableVideos.length ? (
