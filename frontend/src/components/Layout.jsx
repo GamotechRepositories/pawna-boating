@@ -42,18 +42,29 @@ export default function Layout({ children, path }) {
             </div>
             <div className="min-w-0">
               <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric"><Icon name="calendar" className="size-4 shrink-0" />Book Your Stay</h2>
-              <div className="flex flex-wrap gap-x-5">
+              <div className="flex flex-wrap gap-x-5 md:flex-col md:items-start">
                 {['9975212123', '9689151919', '9823900620'].map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-white/80 transition-colors hover:text-turmeric"><Icon name="phone" className="size-4 shrink-0 text-turmeric" />{number}</a>)}
               </div>
+              
             </div>
           </div>
-          <div className="rounded-2xl border border-white/15 bg-white/5 p-4 sm:p-8">
+          <div className="self-start rounded-2xl border border-white/15 bg-white/5 p-4 sm:p-8">
             <p className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Your next getaway</p>
             <h2 className="font-display text-2xl leading-tight sm:text-3xl">Make time for the outdoors.</h2>
             <p className="mt-3 max-w-md text-sm leading-6 text-white/65">Find your stay, pick your adventures, and bring your favourite people along.</p>
             <div className="mt-4 sm:mt-6"><Button href="/plan-your-visit">Let’s make a plan</Button></div>
           </div>
         </div>
+        <section aria-labelledby="footer-social-heading" className="border-t border-white/15 py-6 sm:py-8">
+          <h2 id="footer-social-heading" className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Stay connected</h2>
+          <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+            {[
+              { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/pawna.boating.camping' },
+              { label: 'WhatsApp', icon: 'chat', href: 'https://wa.me/919975212123' },
+              { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/pawnaboatingcamping' },
+            ].map(social => <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-full border border-white/20 px-2 text-[11px] text-white/85 transition-colors hover:border-turmeric hover:bg-white/5 hover:text-turmeric sm:gap-2 sm:px-4 sm:text-sm"><Icon name={social.icon} className="size-4 shrink-0" />{social.label}<Icon name="arrow" className="ml-1 hidden size-4 -rotate-45 sm:block" /></a>)}
+          </div>
+        </section>
         <div className="flex flex-col gap-2 border-t border-white/15 pt-4 sm:gap-3 sm:pt-6 text-xs leading-5 text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Pawna. All rights reserved.</p>
           <p className="flex items-center gap-2"><Icon name="sun" className="size-4 text-turmeric" /> Nature is calling. Take your time.</p>

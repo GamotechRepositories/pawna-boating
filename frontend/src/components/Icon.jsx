@@ -11,6 +11,10 @@ const maskedIcons = { boat: boatIcon, tent: tentIcon, archery: archeryIcon, ches
 const imageIcons = { leaf: leafIcon, badminton: badmintonIcon, cricket: cricketIcon, carrom: carromIcon }
 
 const paths = {
+  instagram: 'M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4ZM16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM17.5 6.5h.01',
+  facebook: 'M14 22V12h3l.5-4H14V6c0-1.2.3-2 2-2h2V.5A24 24 0 0 0 15 .3c-3 0-5 1.8-5 5.2V8H7v4h3v10',
+  chat: 'M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5ZM8 10h8M8 14h5',
+  clock: 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0ZM12 6v6l4 2',
   calendar: 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2ZM8 14h2M14 14h2M8 18h2',
   compass: 'M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0ZM16 8l-2.5 5.5L8 16l2.5-5.5L16 8Z',
   location: 'M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
