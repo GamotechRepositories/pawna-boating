@@ -10,11 +10,6 @@ export default function ExperiencesPage() {
 
   return (
     <section className="page-width py-16 md:py-24">
-      <SectionHeading
-        eyebrow="Make time for a little fun"
-        title="Follow your sense of adventure."
-        description="On the water, in the pool, or around the games board — there’s more than one way to spend a good day together."
-      />
       <div className="experience-filters" aria-label="Filter experiences">
         {['All', 'Water', 'Games', 'Family'].map(category => <button
           key={category}
@@ -27,7 +22,14 @@ export default function ExperiencesPage() {
       <div className="-mx-5 sm:mx-0">
         <ExperienceCarousel key={filter} items={visible} />
       </div>
-      <div className="mt-12 flex flex-wrap items-center justify-between gap-6 rounded-xl bg-river-surface p-8">
+      <div className="mt-12 rounded-3xl bg-turmeric p-6 sm:p-10 [&>div]:mb-0">
+      <SectionHeading
+        eyebrow="Make time for a little fun"
+        title="Follow your sense of adventure."
+        description="On the water, in the pool, or around the games board — there’s more than one way to spend a good day together."
+      />
+      </div>
+      <div className="mt-12 flex flex-wrap items-center justify-between gap-6 rounded-xl border border-turmeric/40 bg-gradient-to-r from-turmeric/25 to-primary/10 p-8">
         <p className="max-w-xl text-[13px] sm:text-sm leading-6 sm:leading-7">Ask the camp about activity availability, timings, safety guidance, and any additional charges. Children need adult supervision around pools and water.</p>
         <Button href="/plan-your-visit">Plan a day outdoors</Button>
       </div>

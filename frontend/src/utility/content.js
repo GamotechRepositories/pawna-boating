@@ -1,6 +1,7 @@
-import villaImage from '../assets/villa.png'
-import tentsImage from '../assets/tents.png'
-import containerImage from '../assets/Container.png'
+import glampingImage from '../assets/glamping-tents-comp.png'
+import villaImage from '../assets/Villa-comp.png'
+import tentsImage from '../assets/tents-comp.png'
+import containerImage from '../assets/container-rooms-comp.png'
 
 export const brand = 'Paluma'
 export const photos = {
@@ -8,7 +9,7 @@ export const photos = {
   camping: tentsImage,
   container: containerImage,
   villa: villaImage,
-  glamping: tentsImage,
+  glamping: glampingImage,
   boating: 'https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1400&q=85',
 }
 export const stays = [
@@ -28,4 +29,4 @@ export const activities = [
   { name: 'Chess', category: 'Games', icon: 'chess', description: 'Take your time. Your next move can wait.' },
   { name: 'Kids play area', category: 'Family', icon: 'sun', description: 'A space for little explorers to play and make their own memories.' },
 ]
-export const navigation = [{ path: '/', label: 'Home' }, { path: '/stays', label: 'Our stays' }, { path: '/experiences', label: 'Experiences' }, { path: '/video-gallery', label: 'Video gallery' }, { path: '/plan-your-visit', label: 'Plan your visit' }]
+export const navigation = [{ path: '/', label: 'Home' }, { path: '/experiences', label: 'Experiences' }, { path: '/video-gallery', label: 'Video gallery' }, { path: '/plan-your-visit', label: 'Plan your visit' }]

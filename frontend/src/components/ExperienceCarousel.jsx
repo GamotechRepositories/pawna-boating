@@ -42,8 +42,8 @@ export default function ExperienceCarousel({ items }) {
           <Motion.div
             key={items[index].name}
             className="h-full"
-            initial={reducedMotion ? false : { opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={reducedMotion ? false : { opacity: 0, rotateY: -18, scale: 0.94 }}
+            animate={{ opacity: 1, rotateY: 0, scale: 1 }}
             transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           >
             <ExperienceCard activity={items[index]} active />

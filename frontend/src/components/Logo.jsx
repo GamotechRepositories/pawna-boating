@@ -12,7 +12,7 @@ export default function Logo({ footer = false }) {
         alt="Pawna Boating & Jungle River Camp"
         width="1288"
         height="937"
-        className={`w-auto object-contain ${footer ? 'h-32' : 'h-20'}`}
+        className={`w-auto object-contain ${footer ? 'h-32' : 'h-12 sm:h-16'}`}
       />
     </a>
   )

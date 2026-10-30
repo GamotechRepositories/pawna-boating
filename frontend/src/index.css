@@ -62,34 +62,38 @@
     --experience-card-width: calc((100% - 1.5rem) / 1.6);
     --experience-gap: .75rem;
     @apply isolate grid overflow-hidden py-8;
+    perspective: 1100px;
+    perspective-origin: 50% 45%;
     touch-action: pan-y pinch-zoom;
   }
   .experience-slide {
     grid-area: 1 / 1;
     width: var(--experience-card-width);
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
     @apply min-w-0 self-stretch justify-self-center rounded-2xl text-left;
   }
   .experience-slide-current { @apply relative z-10; }
-  .experience-slide-previous { transform: translateX(calc(-100% - var(--experience-gap))); }
-  .experience-slide-next { transform: translateX(calc(100% + var(--experience-gap))); }
+  .experience-slide-previous { transform: translateX(-88%) translateZ(-120px) rotateY(-35deg); }
+  .experience-slide-next { transform: translateX(88%) translateZ(-120px) rotateY(35deg); }
   .experience-slide-previous, .experience-slide-next { @apply relative z-0; }
   .experience-slide-previous:focus-visible, .experience-slide-next:focus-visible { outline-offset: -5px; }
-  .experience-preview { @apply pointer-events-none h-full opacity-50 blur-[2px] transition-[filter,opacity] duration-300; }
+  .experience-preview { @apply pointer-events-none h-full opacity-80 transition-[filter,opacity] duration-300; }
   .experience-slide-previous:hover .experience-preview,
   .experience-slide-next:hover .experience-preview,
   .experience-slide-previous:focus-visible .experience-preview,
   .experience-slide-next:focus-visible .experience-preview { @apply opacity-80 blur-none; }
-  .experience-card { @apply flex h-full min-h-[320px] select-none flex-col rounded-2xl border border-sand bg-white p-3 sm:min-h-[420px] sm:p-8; }
-  .experience-card-active { @apply border-jungle/30 shadow-lg shadow-jungle/10; }
+  .experience-card { @apply flex h-full min-h-[400px] select-none flex-col rounded-2xl border border-sand bg-white p-3 sm:min-h-[540px] sm:p-8; }
+  .experience-card-active { @apply border-jungle/30 shadow-xl shadow-jungle/20; }
 }
 @media (min-width: 1024px) {
   .experience-stage {
-    /* Desktop has three complete cards. */
+    /* Wider cards wrap around the cylindrical carousel on desktop. */
     --experience-card-width: calc((100% - 4rem) / 3);
     --experience-gap: 2rem;
   }
-  .experience-slide-previous { transform: translateX(calc(-100% - var(--experience-gap))) scale(.93); }
-  .experience-slide-next { transform: translateX(calc(100% + var(--experience-gap))) scale(.93); }
+  .experience-slide-previous { transform: translateX(-94%) translateZ(-160px) rotateY(-38deg); }
+  .experience-slide-next { transform: translateX(94%) translateZ(-160px) rotateY(38deg); }
 }
 
 @keyframes highlights-scroll {
@@ -101,7 +105,6 @@
     @apply flex w-max;
     animation: highlights-scroll 24s linear infinite;
   }
-  .highlights-strip:hover .highlights-track,
   .highlights-strip:focus-within .highlights-track {
     animation-play-state: paused;
   }
@@ -196,7 +199,7 @@
   .highlights-band {
     fill: none;
     stroke: var(--brand-turmeric, #FFC928);
-    stroke-width: 80;
+    stroke-width: 70;
     stroke-linecap: butt;
   }
   .highlights-flow-text {
@@ -215,6 +218,6 @@
     .highlights-flow-desktop { display: none; }
     .highlights-flow-mobile { display: block; width: 100%; height: 64px; }
     .highlights-flow-mobile .highlights-flow-text { font-size: 26px; }
-    .highlights-flow-mobile .highlights-band { stroke-width: 76; }
+    .highlights-flow-mobile .highlights-band { stroke-width: 88; }
   }
 }
