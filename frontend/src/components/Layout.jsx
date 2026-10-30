@@ -30,16 +30,18 @@ export default function Layout({ children, path }) {
         </div>
         <div className="grid gap-6 py-6 sm:gap-10 sm:py-10 md:grid-cols-[1fr_1.25fr] md:gap-16">
           <div className="grid grid-cols-2 items-start gap-3 sm:gap-8">
+            <div className="col-span-2 mb-2">
+              <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric"><Icon name="location" className="size-4 shrink-0" />Find us</h2>
+              <address className="overflow-x-auto whitespace-nowrap text-sm not-italic leading-6 text-white/80">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</address>
+            </div>
             <div className="min-w-0">
-            <h2 className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Explore Pawna</h2>
+            <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric"><Icon name="compass" className="size-4 shrink-0" />Explore Pawna</h2>
             <nav aria-label="Footer navigation" className="grid gap-y-0 sm:gap-y-1">
               {navigation.map(item => <a key={item.path} href={item.path} className="flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-turmeric">{item.label}</a>)}
             </nav>
             </div>
             <div className="min-w-0">
-              <h2 className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Find us</h2>
-              <address className="flex max-w-sm items-start gap-2 text-sm not-italic leading-6 text-white/80"><Icon name="location" className="mt-1 size-4 shrink-0 text-turmeric" /><span>Pawna Dam, Pawna Riverside,<br />Yelse Gaon, Lonavala</span></address>
-              <h2 className="mb-2 mt-3 sm:mt-5 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Book your stay</h2>
+              <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric"><Icon name="calendar" className="size-4 shrink-0" />Book Your Stay</h2>
               <div className="flex flex-wrap gap-x-5">
                 {['9975212123', '9689151919', '9823900620'].map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-white/80 transition-colors hover:text-turmeric"><Icon name="phone" className="size-4 shrink-0 text-turmeric" />{number}</a>)}
               </div>
