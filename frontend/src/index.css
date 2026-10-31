@@ -267,3 +267,6 @@
     .highlights-flow-mobile .highlights-band { stroke-width: 88; }
   }
 }
+
+.reviews-carousel { scrollbar-width: none; }
+.reviews-carousel::-webkit-scrollbar { display: none; }

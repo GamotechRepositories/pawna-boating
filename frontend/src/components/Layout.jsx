@@ -25,7 +25,7 @@ export default function Layout({ children, path }) {
           </div>
           <div>
             <h2 className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-forest">Find us</h2>
-            <address className="text-sm not-italic leading-6 text-forest/80">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</address>
+            <address className="text-sm not-italic leading-6 text-forest/80"><a href="https://www.google.com/maps/place/Pawna+boating+camping/@18.6832061,73.5281079,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2a96d7997ae95:0x32392dd5e8767d68!8m2!3d18.6832061!4d73.5281079!16s%2Fg%2F11h3ldnpb4" target="_blank" rel="noopener noreferrer" className="underline decoration-current/30 underline-offset-4 hover:decoration-current">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</a></address>
           </div>
         </div></Motion.nav>}</AnimatePresence></header>{!isHome && <div aria-hidden="true" className="h-16 sm:h-20" />}<main id="main-content">{children}</main><footer className="bg-forest text-warm">
       <div className="page-width py-6 sm:py-14">
@@ -39,7 +39,7 @@ export default function Layout({ children, path }) {
           </div>
           <div className="max-w-sm sm:text-right">
             <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric sm:justify-end">Find us</h2>
-            <address className="text-sm not-italic leading-6 text-white/80">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</address>
+            <address className="text-sm not-italic leading-6 text-white/80"><a href="https://www.google.com/maps/place/Pawna+boating+camping/@18.6832061,73.5281079,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2a96d7997ae95:0x32392dd5e8767d68!8m2!3d18.6832061!4d73.5281079!16s%2Fg%2F11h3ldnpb4" target="_blank" rel="noopener noreferrer" className="underline decoration-current/30 underline-offset-4 hover:decoration-current">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</a></address>
           </div>
         </div>
         <div className="grid gap-6 py-6 sm:gap-10 sm:py-10 md:grid-cols-[1fr_1.25fr] md:gap-16">

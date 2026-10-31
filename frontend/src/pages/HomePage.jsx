@@ -1,3 +1,4 @@
+import ReviewsSection from '../components/ReviewsSection'
 import VideoGallery from '../components/VideoGallery'
 import { getawayVideos } from '../utility/videos'
 import Reveal from '../components/Reveal'
@@ -33,5 +34,5 @@ export default function HomePage() {
     eyebrow=""
     title="A little closer to being here."
     description=""
-  /></>
+  /><ReviewsSection /></>
 }
