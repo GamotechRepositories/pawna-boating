@@ -24,7 +24,7 @@ export default function ExperiencesPage() {
       </div>
       <div className="mt-12 rounded-3xl bg-turmeric p-6 sm:p-10 [&>div]:mb-0">
       <SectionHeading
-        eyebrow="Make time for a little fun"
+        eyebrow=""
         title="Follow your sense of adventure."
         description="On the water, in the pool, or around the games board — there’s more than one way to spend a good day together."
       />

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @layer components {
-  .hanging-carousel { position: relative; display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .hanging-carousel { position: relative; display: flex; overflow-x: auto; scroll-snap-type: none; scrollbar-width: none; }
   .hanging-carousel::-webkit-scrollbar { display: none; }
   .hanging-slide { flex: 0 0 100%; min-width: 0; display: flex; justify-content: center; align-items: start; padding: 2.5rem 1.5rem 2rem; scroll-snap-align: start; }
   @media (min-width: 1024px) { .hanging-slide { flex-basis: 25%; } }
@@ -120,45 +120,90 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    background: var(--color-turmeric, #F4C430);
+    color: var(--color-forest, #163828);
   }
+  .video-gallery-heading .section-title,
+  .video-gallery-heading .eyebrow { color: var(--color-forest, #163828); }
+  .video-gallery-heading p { color: #163828c4; }
+  .video-gallery-heading .max-w-2xl,
+  .video-gallery-heading .max-w-xl { margin-inline: auto; }
   .video-gallery-row {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: minmax(220px, 72%);
+    grid-auto-columns: minmax(230px, 76vw);
     align-items: start;
-    gap: 1.25rem;
+    gap: 1.5rem;
     overflow-x: auto;
-    padding: .75rem .25rem 2rem;
-    scroll-snap-type: x proximity;
+    padding: 1rem max(1.25rem, calc((100vw - 1440px) / 2)) 2rem;
+    scroll-snap-type: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
-  .video-gallery-card {
-    min-width: 0;
-    scroll-snap-align: start;
-  }
-  .video-gallery-card:nth-child(even) { padding-top: 3rem; }
+  .video-gallery-row::-webkit-scrollbar { display: none; }
+  .video-gallery-card { min-width: 0; scroll-snap-align: center; }
+  .video-gallery-card:nth-child(5n + 2),
+  .video-gallery-card:nth-child(5n + 4) { padding-top: 1.5rem; }
+  .video-gallery-card:nth-child(5n + 3) { padding-top: 3rem; }
   .video-gallery-photo {
-    padding: .5rem;
-    background: var(--brand-background, #FFFDF7);
-    box-shadow: 0 12px 24px -14px #4b2e1f66;
-  }
-  .video-gallery-label {
     position: relative;
-    margin: -.25rem -.75rem 0;
-    padding: .85rem .5rem .2rem;
-    border-radius: .4rem;
-    color: var(--brand-mountain, #4B2E1F);
-    text-align: center;
-    font-weight: 700;
-    font-size: .875rem;
-    line-height: 1.4;
+    overflow: hidden;
+    border: 4px solid #071320;
+    border-radius: 1.25rem;
+    background: #082a55;
   }
+  .video-gallery-photo video { aspect-ratio: 5 / 7; }
+  .video-gallery-shade {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(transparent 45%, #03172fdd 100%);
+  }
+  .video-gallery-play {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    display: grid;
+    place-items: center;
+    width: 4.5rem; height: 4.5rem;
+    border-radius: 50%;
+    background: #122843d9;
+    color: #fff3d5;
+    cursor: pointer;
+    transition: background .2s, scale .2s;
+  }
+  .video-gallery-play:hover { background: #0b59be; scale: 1.06; }
+  .video-gallery-play:focus-visible { outline: 3px solid white; outline-offset: 5px; }
+  .video-gallery-play svg { width: 2.25rem; height: 2.25rem; }
+  .video-gallery-caption {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    pointer-events: none;
+  }
+  .video-gallery-label { color: white; font-size: 1.25rem; line-height: 1.3; font-weight: 800; }
+  .video-gallery-caption p {
+    margin-top: .5rem;
+    color: #ffffffc9;
+    font-size: .95rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .video-gallery-error { position: relative; padding: 1rem; color: white; }
+  .video-gallery-error a { text-decoration: underline; }
   @media (min-width: 640px) {
-    .video-gallery-row { grid-auto-columns: minmax(220px, 40%); }
-    .video-gallery-card:nth-child(even) { padding-top: 4rem; }
+    .video-gallery-row { grid-auto-columns: 42vw; gap: 2rem; }
   }
   @media (min-width: 1024px) {
-    .video-gallery-row { grid-auto-columns: minmax(0, 1fr); gap: 1.5rem; }
-    .video-gallery-card:nth-child(even) { padding-top: 4.5rem; }
+    .video-gallery-row { grid-auto-columns: calc((100% - 6rem) / 5); gap: 1.5rem; padding-inline: 1.5rem; }
+    .video-gallery-card:nth-child(5n + 2),
+  .video-gallery-card:nth-child(5n + 4) { padding-top: 1.5rem; }
+    .video-gallery-card:nth-child(5n + 3) { padding-top: 3rem; }
   }
 }
 

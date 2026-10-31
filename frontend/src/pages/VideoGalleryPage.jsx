@@ -7,9 +7,9 @@ export default function VideoGalleryPage() {
       <h1 className="sr-only">Video gallery</h1>
       <VideoGallery
         videos={getawayVideos}
-        eyebrow="The getaway, in motion"
+        eyebrow=""
         title="A little closer to being here."
-        description="Press play for a glimpse of Pawna. Your next outdoor escape starts with a little inspiration."
+        description=""
       />
     </>
   )

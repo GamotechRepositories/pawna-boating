@@ -47,7 +47,7 @@ export default function HangingPhotoGallery({ images, backgroundImage }) {
         <img src={backgroundImage} alt="" loading="lazy" className="absolute inset-0 -z-20 size-full scale-110 object-cover blur-sm" />
         <div className="absolute inset-0 -z-10 bg-forest/40" />
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
-          <p className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-secondary">A glimpse of the getaway</p>
+
           <h2 className="section-title text-white">See the moments. Feel the escape.</h2>
           <p className="mt-4 leading-7 text-white/85">Little adventures. Favourite people. Memories worth holding on to.</p>
         </div>

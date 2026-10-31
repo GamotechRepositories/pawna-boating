@@ -1,5 +1,6 @@
 import promotionalVideo from '../assets/promotional.mp4'
 import funVideo from '../assets/FunV.mp4'
+import funCover from '../assets/fun-cover.jpg'
 import lakeVideo from '../assets/LakeV.mp4'
 import getawayVideo from '../assets/MixV.mp4'
 import playVideo from '../assets/PlayV.mp4'
@@ -16,6 +17,7 @@ export const getawayVideos = [
   {
     id: 'pawna-fun',
     src: funVideo,
+    poster: funCover,
     title: 'Good times together',
     description: 'A little fun and a few more memories from your outdoor escape.',
   },
