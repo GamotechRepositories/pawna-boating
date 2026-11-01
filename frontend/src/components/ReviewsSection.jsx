@@ -23,13 +23,13 @@ export default function ReviewsSection() {
     if (card) track.scrollBy({ left: direction * (card.getBoundingClientRect().width + 20), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
   }
   return <section className="reviews-section w-full" aria-labelledby="guest-reviews-heading">
-    <div className="mx-auto w-full max-w-7xl px-0 py-12 sm:px-8 md:py-16 lg:px-12">
+    <div className="mx-auto w-full max-w-7xl pl-5 pr-0 py-12 sm:px-8 md:py-16 lg:px-12">
     <Reveal className="text-center">
-      <h2 id="guest-reviews-heading" className="section-title">Guest reviews</h2>
+      <h2 id="guest-reviews-heading" className="inline-block -skew-x-6 bg-[#F8C454] px-4 py-2 font-sans text-[clamp(1.75rem,3.2vw,3rem)] font-black uppercase leading-tight text-black"><span className="inline-block skew-x-6">Guest reviews</span></h2>
       <p className="mt-3 text-xs text-forest/60">Excerpts from guest reviews</p>
     </Reveal>
     <div ref={trackRef} role="region" aria-label="Guest review carousel" tabIndex={0} className="reviews-carousel mt-8 flex items-start snap-x snap-proximity gap-5 overflow-x-auto overflow-y-hidden pb-3">
-      {reviews.map((review, index) => <Reveal key={review.name} delay={Math.min(index, 3) * 0.1} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]">
+      {reviews.map((review, index) => <div key={review.name} className="w-[80%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]">
         <figure style={{ backgroundColor: index % 2 === 0 ? '#C4D6D8' : '#D3D460' }} className="rounded-3xl p-6 sm:p-8">
           <blockquote>
             <h3 className="text-lg font-black leading-tight tracking-tight text-[#07366B] sm:text-xl">“{review.text.split(/[.!]/)[0].split(' ').slice(0, 7).join(' ')}”</h3>
@@ -41,7 +41,7 @@ export default function ReviewsSection() {
             {review.demo && <span className="mt-1 block text-xs">Demo review · sample content</span>}
           </figcaption>
         </figure>
-      </Reveal>)}
+      </div>)}
     </div>
     <div className="mt-5 flex justify-center gap-3">
       <button type="button" onClick={() => scroll(-1)} aria-label="Previous reviews" className="flex size-11 items-center justify-center rounded-full border border-sand bg-white text-forest hover:bg-sand"><Icon name="arrow" className="size-5 rotate-180" /></button>

@@ -24,7 +24,7 @@ export default function HangingPhotoGallery({ images }) {
     <section
       ref={sectionRef}
       aria-label="Moments from the getaway"
-      className="relative w-full photo-gallery-sky text-[#4B2E1F]"
+      className="relative w-full photo-gallery-sky text-[#1F2937] sm:text-[#4B2E1F]"
       style={{ height: `${Math.max(1, images.length) * 80 + 100}vh` }}
     >
       <div className="photo-gallery-sky sticky top-20 isolate">
@@ -59,10 +59,13 @@ export default function HangingPhotoGallery({ images }) {
         </div>
       <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-7xl items-center gap-6 px-5 py-6 sm:px-10 md:grid-cols-2 md:gap-16 md:py-10">
         <div className="max-w-xl">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[.2em] text-[#4B2E1F]/70">Moments from the getaway</p>
-          <h2 className="section-title text-[#4B2E1F]">See the moments. Feel the escape.</h2>
-          <p className="mt-5 max-w-md leading-7 text-[#4B2E1F]/85">Little adventures. Favourite people. Memories worth holding on to.</p>
-          <p className="mt-6 text-sm text-[#4B2E1F]/65">Scroll down to explore our getaway.</p>
+          <p className="mb-5 w-fit rounded-full border border-[#12365b] bg-white px-5 py-2 text-sm font-extrabold text-[#07366B]">Moments from the getaway</p>
+          <h2 className="text-white font-sans text-[clamp(1.5rem,3.2vw,3rem)] font-black uppercase leading-tight">
+            <span className="block whitespace-nowrap text-[clamp(1.25rem,4.6vw,2.25rem)] tracking-tight">See the moments.</span>
+            <span className="mt-2 inline-block -skew-x-6 bg-[#F8C454] px-3 py-1 text-black"><span className="inline-block skew-x-6">Feel the escape.</span></span>
+          </h2>
+          <p className="mt-5 max-w-md leading-7 text-[#1F2937]/85 sm:text-[#4B2E1F]/85">Little adventures. Favourite people. Memories worth holding on to.</p>
+          <p className="mt-6 text-sm text-[#1F2937]/65 sm:text-[#4B2E1F]/65">Scroll down to explore our getaway.</p>
           <div className="mt-6 flex gap-2" aria-hidden="true">
             {images.map((image, index) => (
               <span key={`${image.src}-${index}`} className={`h-1 rounded-full transition-all motion-reduce:transition-none ${index === activeIndex ? 'w-10 bg-secondary' : 'w-5 bg-[#12365b]/20'}`} />
@@ -84,9 +87,9 @@ export default function HangingPhotoGallery({ images }) {
             </Motion.div>
             </AnimatePresence>
           </div>
-          <figcaption className="mt-4 flex items-center justify-between gap-4 text-sm text-[#4B2E1F]/85">
+          <figcaption className="mt-4 flex items-center justify-between gap-4 text-sm text-[#1F2937]/85 sm:text-[#4B2E1F]/85">
             <span>{photo.caption}</span>
-            <span className="tabular-nums text-[#4B2E1F]/60">{String(activeIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}</span>
+            <span className="tabular-nums text-[#1F2937]/60 sm:text-[#4B2E1F]/60">{String(activeIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}</span>
           </figcaption>
         </figure>
       </div>

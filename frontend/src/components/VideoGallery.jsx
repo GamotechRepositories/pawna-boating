@@ -109,11 +109,11 @@ export default function VideoGallery({
   const availableVideos = videos.filter(video => video.src)
 
   return (
-    <section aria-labelledby={headingId} className={`video-gallery ${spacing}`}>
+    <section aria-labelledby={title ? headingId : undefined} aria-label={title ? undefined : 'Video gallery'} className={`video-gallery ${spacing}`}>
       <div className="relative pt-6 md:pt-10">
-        <div id={headingId} className="video-gallery-heading page-width text-center [&>div]:justify-center">
+        {title && <div id={headingId} className="video-gallery-heading page-width text-center [&>div]:justify-center">
           <SectionHeading eyebrow={eyebrow} title={title} description={description} />
-        </div>
+        </div>}
         {availableVideos.length ? (
           <ul ref={rowRef} aria-label="Videos from the getaway" className="video-gallery-row">
             {availableVideos.map((video, index) => <VideoCard key={video.id} video={video} index={index} />)}

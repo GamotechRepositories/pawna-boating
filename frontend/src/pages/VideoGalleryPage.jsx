@@ -8,7 +8,7 @@ export default function VideoGalleryPage() {
       <VideoGallery
         videos={getawayVideos}
         eyebrow=""
-        title="A little closer to being here."
+        title=""
         description=""
       />
     </>
