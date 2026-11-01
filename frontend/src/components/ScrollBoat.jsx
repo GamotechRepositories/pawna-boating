@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 const wavePath = 'M0 105 C110 55 240 125 345 120 S465 5 535 35 S655 170 735 120 S845 65 910 85 S1000 155 1040 130 S1160 55 1210 85 S1320 155 1360 125 L1440 90'
 const mobileWavePath = 'M0 115 C70 95 100 65 185 65 C285 65 320 145 410 145 C510 145 565 30 675 30 C795 30 845 120 930 120 C1015 120 1080 80 1160 80 C1260 80 1310 155 1370 140 L1440 110'
 
 export default function ScrollBoat() {
+  const gradientId = useId()
   const trackRef = useRef(null)
   const boatRef = useRef(null)
   const pathRef = useRef(null)
@@ -63,7 +64,14 @@ export default function ScrollBoat() {
     <div aria-hidden="true" className="pointer-events-none mb-2 w-full overflow-hidden">
       <div ref={trackRef}>
         <svg viewBox="0 -80 1440 300" className="block h-auto min-h-28 w-full bg-warm" preserveAspectRatio="none" fill="none">
-          <path ref={fillRef} d={`${wavePath} L1440 220 H0 Z`} fill="#0B59BE" />
+          <defs>
+            <linearGradient id={gradientId} x1="0" y1="30" x2="0" y2="220" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#78c7f2" />
+              <stop offset="55%" stopColor="#2689d5" />
+              <stop offset="100%" stopColor="#0b59be" />
+            </linearGradient>
+          </defs>
+          <path ref={fillRef} d={`${wavePath} L1440 220 H0 Z`} fill={`url(#${gradientId})`} />
           <path ref={pathRef} d={wavePath} />
           <g ref={boatRef}>
             <g transform="scale(1.6)">

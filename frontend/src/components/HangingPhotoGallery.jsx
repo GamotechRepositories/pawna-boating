@@ -1,80 +1,95 @@
-import { useEffect, useId, useRef } from 'react'
-import { motion as Motion, useReducedMotion } from 'motion/react'
-import Icon from './Icon'
+import { useRef, useState } from 'react'
+import { AnimatePresence, motion as Motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from 'motion/react'
 
-export default function HangingPhotoGallery({ images, backgroundImage }) {
+export default function HangingPhotoGallery({ images }) {
+  const sectionRef = useRef(null)
+  const [activeIndex, setActiveIndex] = useState(0)
   const reducedMotion = useReducedMotion()
-  const trackRef = useRef(null)
-  const trackId = useId()
-  const looping = images.length > 1
-  const slides = looping ? [...images, ...images, ...images] : images
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+  const glowY = useTransform(scrollYProgress, [0, 1], ['-15%', '35%'])
+  const ringRotate = useTransform(scrollYProgress, [0, 1], [0, 120])
+  const glowX = useTransform(scrollYProgress, [0, 1], ['15%', '-25%'])
 
-  useEffect(() => {
-    const track = trackRef.current
-    if (!looping) return
-    let timer
-    const cycleWidth = () => track.firstElementChild.getBoundingClientRect().width * images.length
-    const reset = () => track.scrollTo({ left: cycleWidth(), behavior: 'instant' })
-    const normalize = () => {
-      const width = cycleWidth()
-      if (width && (track.scrollLeft < width || track.scrollLeft >= width * 2)) {
-        track.scrollTo({ left: width + ((track.scrollLeft % width) + width) % width, behavior: 'instant' })
-      }
-    }
-    const onScroll = () => {
-      clearTimeout(timer)
-      timer = setTimeout(normalize, 180)
-    }
-    reset()
-    track.addEventListener('scroll', onScroll, { passive: true })
-    const observer = new ResizeObserver(reset)
-    observer.observe(track)
-    return () => {
-      clearTimeout(timer)
-      track.removeEventListener('scroll', onScroll)
-      observer.disconnect()
-    }
-  }, [images.length, looping])
+  useMotionValueEvent(scrollYProgress, 'change', progress => {
+    setActiveIndex(Math.min(images.length - 1, Math.max(0, Math.floor(progress * images.length))))
+  })
 
-  const move = direction => {
-    const track = trackRef.current
-    const step = track.firstElementChild.getBoundingClientRect().width
-    track.scrollBy({ left: direction * step, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
-  }
+  if (!images.length) return null
+  const photo = images[activeIndex] || images[0]
+
   return (
-    <section className="w-full" aria-label="Moments from the getaway">
-      <div className="relative isolate w-full overflow-hidden bg-forest px-5 pb-12 pt-8 sm:px-10 sm:py-14">
-        <img src={backgroundImage} alt="" loading="lazy" className="absolute inset-0 -z-20 size-full scale-110 object-cover blur-sm" />
-        <div className="absolute inset-0 -z-10 bg-forest/40" />
-        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-14">
-
-          <h2 className="section-title text-white">See the moments. Feel the escape.</h2>
-          <p className="mt-4 leading-7 text-white/85">Little adventures. Favourite people. Memories worth holding on to.</p>
+    <section
+      ref={sectionRef}
+      aria-label="Moments from the getaway"
+      className="relative w-full photo-gallery-sky text-[#4B2E1F]"
+      style={{ height: `${Math.max(1, images.length) * 80 + 100}vh` }}
+    >
+      <div className="photo-gallery-sky sticky top-20 isolate">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+          <Motion.div className="gallery-glow gallery-glow-green" style={reducedMotion ? undefined : { y: glowY }} />
+          <Motion.div className="gallery-glow gallery-glow-gold" style={reducedMotion ? undefined : { x: glowX }} />
+          <div className="gallery-dot-grid" />
+          <Motion.div className="gallery-orbit" style={reducedMotion ? undefined : { rotate: ringRotate }}><span /></Motion.div>
+          <svg className="gallery-ferris-wheel" viewBox="0 0 480 560" fill="none">
+            <path d="M240 248 126 532M240 248l114 284M98 534h284" stroke="currentColor" strokeWidth="8" strokeLinecap="round" />
+            <path d="m164 440 152 0" stroke="currentColor" strokeWidth="4" />
+            <g className="gallery-wheel-rotor">
+              <circle cx="240" cy="240" r="196" stroke="currentColor" strokeWidth="5" />
+              <circle cx="240" cy="240" r="176" stroke="currentColor" strokeWidth="2" />
+              {Array.from({ length: 12 }, (_, index) => {
+                const angle = index * Math.PI / 6
+                const x = 240 + Math.sin(angle) * 196
+                const y = 240 - Math.cos(angle) * 196
+                return <g key={index}>
+                  <path d={`M240 240 ${x} ${y}`} stroke="currentColor" strokeWidth="2" />
+                  <circle cx={x} cy={y} r="5" fill="currentColor" />
+                  <g className="gallery-wheel-cabin" style={{ transformOrigin: `${x}px ${y}px` }}>
+                    <path d={`M${x} ${y}v12`} stroke="currentColor" strokeWidth="3" />
+                    <rect x={x - 14} y={y + 12} width="28" height="24" rx="6" stroke="currentColor" strokeWidth="3" fill="#a8dcf7" />
+                    <path d={`M${x - 14} ${y + 22}h28`} stroke="currentColor" strokeWidth="2" />
+                  </g>
+                </g>
+              })}
+              <circle cx="240" cy="240" r="12" fill="currentColor" />
+            </g>
+          </svg>
         </div>
-        <div role="region" aria-roledescription="carousel" aria-label="Getaway photos" className="relative">
-          <svg aria-hidden="true" viewBox="0 0 1000 100" preserveAspectRatio="none" className="photo-rope"><path d="M-20 12 Q500 108 1020 12" fill="none" stroke="#E8D7B7" strokeWidth="9" /><path d="M-20 10 Q500 106 1020 10" fill="none" stroke="#FFF3DC" strokeWidth="2" /></svg>
-          <div ref={trackRef} id={trackId} tabIndex={0} aria-label="Swipe or scroll to browse photos" className="hanging-carousel">
-            {slides.map((photo, index) => <div key={`${photo.src}-${index}`} className="hanging-slide" role="group" aria-roledescription="slide" aria-label={`${index % images.length + 1} of ${images.length}`}>
-              <Motion.figure
-                className="hanging-photo"
-                initial={reducedMotion ? false : { opacity: 0, y: 28, rotate: 0 }}
-                whileInView={{ opacity: 1, y: 0, rotate: [-3, 3, -4][(index % images.length) % 3] }}
-                viewport={{ once: true, amount: 0.2 }}
-                whileHover={reducedMotion ? undefined : { y: -8, rotate: 0, scale: 1.02 }}
-                transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.25, 0.1, 0.25, 1] }}
-              >
-                <span aria-hidden="true" className="photo-peg" />
-                <img src={photo.src} alt={photo.alt} loading="lazy" className="aspect-[4/5] w-full object-contain bg-[#f6f1e8]" />
-                <figcaption className="px-1 pb-1 pt-3 text-center font-display text-sm text-mountain sm:text-base">{photo.caption}</figcaption>
-              </Motion.figure>
-            </div>)}
+      <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-7xl items-center gap-6 px-5 py-6 sm:px-10 md:grid-cols-2 md:gap-16 md:py-10">
+        <div className="max-w-xl">
+          <p className="mb-4 text-xs font-semibold uppercase tracking-[.2em] text-[#4B2E1F]/70">Moments from the getaway</p>
+          <h2 className="section-title text-[#4B2E1F]">See the moments. Feel the escape.</h2>
+          <p className="mt-5 max-w-md leading-7 text-[#4B2E1F]/85">Little adventures. Favourite people. Memories worth holding on to.</p>
+          <p className="mt-6 text-sm text-[#4B2E1F]/65">Scroll down to explore our getaway.</p>
+          <div className="mt-6 flex gap-2" aria-hidden="true">
+            {images.map((image, index) => (
+              <span key={`${image.src}-${index}`} className={`h-1 rounded-full transition-all motion-reduce:transition-none ${index === activeIndex ? 'w-10 bg-secondary' : 'w-5 bg-[#12365b]/20'}`} />
+            ))}
           </div>
-          {images.length > 1 && <div className="mt-4 flex justify-center gap-4">
-            <button type="button" aria-label="Previous photos" aria-controls={trackId} onClick={() => move(-1)} className="flex size-12 items-center justify-center rounded-full border border-white/60 text-white hover:bg-white/15"><Icon className="size-5 rotate-180" /></button>
-            <button type="button" aria-label="Next photos" aria-controls={trackId} onClick={() => move(1)} className="flex size-12 items-center justify-center rounded-full border border-white/60 text-white hover:bg-white/15"><Icon /></button>
-          </div>}
         </div>
-        <p className="mt-8 text-center text-xs font-semibold uppercase tracking-[.2em] text-white/90 sm:text-sm">A few moments. A whole lot of memories.</p>
+        <figure className="m-0 min-w-0">
+          <div className="relative flex h-[42svh] items-center justify-center md:h-[65svh]">
+            <AnimatePresence initial={false}>
+            <Motion.div
+              key={photo.src}
+              initial={reducedMotion ? false : { opacity: 0, y: 24, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: reducedMotion ? 0 : -16, scale: reducedMotion ? 1 : 0.98 }}
+              transition={{ duration: reducedMotion ? 0 : 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <img src={photo.src} alt={photo.alt} className="h-auto max-h-full w-auto max-w-full rounded-2xl object-contain" />
+            </Motion.div>
+            </AnimatePresence>
+          </div>
+          <figcaption className="mt-4 flex items-center justify-between gap-4 text-sm text-[#4B2E1F]/85">
+            <span>{photo.caption}</span>
+            <span className="tabular-nums text-[#4B2E1F]/60">{String(activeIndex + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}</span>
+          </figcaption>
+        </figure>
+      </div>
       </div>
     </section>
   )

@@ -22,12 +22,13 @@ export default function ReviewsSection() {
     const card = track?.firstElementChild
     if (card) track.scrollBy({ left: direction * (card.getBoundingClientRect().width + 20), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
   }
-  return <section className="page-width py-12 md:py-16" aria-labelledby="guest-reviews-heading">
+  return <section className="reviews-section w-full" aria-labelledby="guest-reviews-heading">
+    <div className="mx-auto w-full max-w-7xl px-0 py-12 sm:px-8 md:py-16 lg:px-12">
     <Reveal className="text-center">
       <h2 id="guest-reviews-heading" className="section-title">Guest reviews</h2>
       <p className="mt-3 text-xs text-forest/60">Excerpts from guest reviews</p>
     </Reveal>
-    <div ref={trackRef} role="region" aria-label="Guest review carousel" tabIndex={0} className="reviews-carousel mt-8 flex items-start snap-x snap-mandatory gap-5 overflow-x-auto pb-3">
+    <div ref={trackRef} role="region" aria-label="Guest review carousel" tabIndex={0} className="reviews-carousel mt-8 flex items-start snap-x snap-proximity gap-5 overflow-x-auto overflow-y-hidden pb-3">
       {reviews.map((review, index) => <Reveal key={review.name} delay={Math.min(index, 3) * 0.1} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]">
         <figure style={{ backgroundColor: index % 2 === 0 ? '#C4D6D8' : '#D3D460' }} className="rounded-3xl p-6 sm:p-8">
           <blockquote>
@@ -47,5 +48,6 @@ export default function ReviewsSection() {
       <button type="button" onClick={() => scroll(1)} aria-label="Next reviews" className="flex size-11 items-center justify-center rounded-full border border-sand bg-white text-forest hover:bg-sand"><Icon name="arrow" className="size-5" /></button>
     </div>
     <div className="mt-6 text-center"><a href={mapsUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center rounded-lg border border-jungle px-5 text-sm font-semibold text-jungle transition-colors hover:bg-river-surface">View on Google Maps</a></div>
+    </div>
   </section>
 }
