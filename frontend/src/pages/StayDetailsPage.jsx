@@ -5,6 +5,7 @@ import villaFour from '../assets/villa-04.jpg'
 import { useParams } from 'react-router-dom'
 import { stays } from '../utility/content'
 import Button from '../components/Button'
+import Icon from '../components/Icon'
 import CampDetails from '../components/CampDetails'
 import StayCard from '../components/StayCard'
 import NotFoundPage from './NotFoundPage'
@@ -15,19 +16,20 @@ export default function StayDetailsPage() {
   if (!stay) return <NotFoundPage />
 
   return <section className="page-width pb-12 pt-4 md:pb-20 md:pt-6">
-    <div className="grid overflow-hidden rounded-2xl border border-sand bg-white shadow-sm lg:grid-cols-[2fr_3fr]">
-      {stay.id === 'villa'
-        ? <StayGallery key={stay.id} name="Villa Stay" images={[stay.image, villaOne, villaTwo, villaFour]} />
-        : <img src={stay.image} alt={stay.name} className="h-64 w-full self-center object-contain sm:h-80 lg:h-96" />}
-      <div className="self-center p-4 sm:p-5 lg:p-6">
+    <div className="grid overflow-hidden rounded-2xl border border-sand bg-white shadow-sm lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <StayGallery key={stay.id} name={stay.id === 'villa' ? 'Villa Stay' : stay.name} images={stay.id === 'villa' ? [stay.image, villaOne, villaTwo, villaFour] : [stay.image]} />
+      <div className="min-w-0 self-center p-5 sm:p-6 lg:p-8">
         {stay.tag && <p className="text-xs font-semibold uppercase tracking-widest text-jungle">{stay.tag}</p>}
-        <h1 className="mt-3 font-display text-4xl text-mountain sm:text-5xl">{stay.name}</h1>
-        <p className="mt-5 text-2xl font-semibold text-mountain">₹{stay.price} <span className="text-sm font-normal text-forest/75">{stay.priceUnit}</span></p>
-        <p className="mt-5 text-sm leading-7 text-forest/80">{stay.description}</p>
-        {stay.id === 'villa' && <p className="mt-4 text-sm font-semibold text-jungle">Private bonfire included</p>}
-        <p className="mt-5 text-sm leading-7">Check-in from 4 pm · Check-out at 11 am<br />Yelse, Pawna</p>
-        <div className="mt-7"><Button href={`/plan-your-visit?stay=${stay.id}`}>Plan this stay</Button></div>
-        <p className="mt-4 text-xs leading-6 text-forest/70">Prices may vary on weekends, national holidays and special days. Children above 5 years are charged.</p>
+        <h1 className={`${stay.tag ? 'mt-2' : ''} font-display text-2xl leading-tight text-balance text-mountain sm:text-3xl lg:text-4xl`}>{stay.name}</h1>
+        <p className="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-3xl font-semibold tabular-nums text-mountain">₹{stay.price}<span className="text-sm font-normal text-forest/75">{stay.priceUnit}</span></p>
+        <p className="mt-3 max-w-xl text-sm leading-6 text-forest/80">{stay.description}</p>
+        {stay.id === 'villa' && <p className="mt-3 inline-flex items-center gap-2 rounded-full bg-jungle/5 px-3 py-1.5 text-xs font-semibold text-jungle"><Icon name="flame" className="size-4" />Private bonfire included</p>}
+        <dl className="mt-5 grid grid-cols-2 gap-4 border-y border-sand py-4">
+          <div><dt className="flex items-center gap-2 text-xs text-forest/65"><Icon name="login" className="size-4 text-jungle" />Check-in</dt><dd className="mt-1.5 text-sm font-semibold text-forest">4 pm onwards</dd></div>
+          <div><dt className="flex items-center gap-2 text-xs text-forest/65"><Icon name="logout" className="size-4 text-jungle" />Check-out</dt><dd className="mt-1.5 text-sm font-semibold text-forest">11 am</dd></div>
+        </dl>
+        <div className="mt-5"><Button href={`/plan-your-visit?stay=${stay.id}`} className="w-full bg-[#F8C454]! hover:bg-[#edb63e]! sm:w-auto">Plan this stay</Button></div>
+        <p className="mt-3 max-w-xl text-xs leading-5 text-forest/65">Prices may vary on weekends, national holidays and special days. Children above 5 years are charged.</p>
       </div>
     </div>
     <CampDetails stay={stay} />
