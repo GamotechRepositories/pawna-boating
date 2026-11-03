@@ -16,7 +16,7 @@ export default function ExperiencesPage() {
           type="button"
           aria-pressed={filter === category}
           onClick={() => setFilter(category)}
-          className={`experience-filter min-h-11 rounded-full border transition-colors ${filter === category ? 'border-jungle bg-jungle text-white' : 'border-sand bg-white hover:border-jungle'}`}
+          className={`experience-filter min-h-8 py-1 text-xs sm:min-h-11 sm:py-2 sm:text-sm rounded-full border transition-colors ${filter === category ? 'border-jungle bg-jungle text-white' : 'border-sand bg-white hover:border-jungle'}`}
         >{category === 'All' ? 'All experiences' : category}</button>)}
       </div>
       <div className="-mx-5 sm:mx-0">

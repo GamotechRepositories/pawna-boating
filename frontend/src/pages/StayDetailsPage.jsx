@@ -1,3 +1,7 @@
+import StayGallery from '../components/StayGallery'
+import villaOne from '../assets/villa-1.jpg'
+import villaTwo from '../assets/villa-02.jpg'
+import villaFour from '../assets/villa-04.jpg'
 import { useParams } from 'react-router-dom'
 import { stays } from '../utility/content'
 import Button from '../components/Button'
@@ -11,8 +15,10 @@ export default function StayDetailsPage() {
   if (!stay) return <NotFoundPage />
 
   return <section className="page-width pb-12 pt-4 md:pb-20 md:pt-6">
-    <div className="grid overflow-hidden rounded-2xl border border-sand bg-white shadow-sm lg:grid-cols-2">
-      <img src={stay.image} alt={stay.name} className="h-auto w-full object-contain lg:aspect-[4/3] lg:h-full lg:object-cover" />
+    <div className="grid overflow-hidden rounded-2xl border border-sand bg-white shadow-sm lg:grid-cols-[2fr_3fr]">
+      {stay.id === 'villa'
+        ? <StayGallery key={stay.id} name="Villa Stay" images={[stay.image, villaOne, villaTwo, villaFour]} />
+        : <img src={stay.image} alt={stay.name} className="h-64 w-full self-center object-contain sm:h-80 lg:h-96" />}
       <div className="self-center p-4 sm:p-5 lg:p-6">
         {stay.tag && <p className="text-xs font-semibold uppercase tracking-widest text-jungle">{stay.tag}</p>}
         <h1 className="mt-3 font-display text-4xl text-mountain sm:text-5xl">{stay.name}</h1>

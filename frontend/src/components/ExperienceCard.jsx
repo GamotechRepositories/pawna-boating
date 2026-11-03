@@ -2,19 +2,21 @@ import { useReducedMotion } from 'motion/react'
 import Icon from './Icon'
 import lakeVideo from '../assets/LakeV.mp4'
 import poolVideo from '../assets/PoolV.mp4'
+import newPoolVideo from '../assets/newPool.mp4'
 import playVideo from '../assets/PlayV.mp4'
 import funVideo from '../assets/FunV.mp4'
 import poster from '../assets/home.png'
 
-export default function ExperienceCard({ activity, active = false }) {
+export default function ExperienceCard({ activity, active = false, videoActivity = activity }) {
   const reducedMotion = useReducedMotion()
-  const video = activity.name.toLowerCase().includes('pool') ? poolVideo
-    : activity.category === 'Water' ? lakeVideo
-    : activity.category === 'Games' ? playVideo : funVideo
+  const video = videoActivity.name === 'Swimming pool' ? newPoolVideo
+    : videoActivity.name.toLowerCase().includes('pool') ? poolVideo
+    : videoActivity.category === 'Water' ? lakeVideo
+    : videoActivity.category === 'Games' ? playVideo : funVideo
 
   return (
     <div className={`experience-card relative isolate overflow-hidden ${active ? 'experience-card-active' : ''}`}>
-      <video key={video} src={video} poster={poster} autoPlay={!reducedMotion} muted loop playsInline preload="metadata" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 size-full object-cover" />
+      <video key={`${videoActivity.name}-${video}`} src={video} poster={poster} autoPlay={!reducedMotion} muted loop playsInline preload="metadata" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-20 size-full object-cover" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/60 via-black/50 to-black/85" />
       <div className="flex items-center justify-between gap-2 sm:gap-3">
         <span className="text-[10px] font-bold uppercase tracking-[.16em] text-white sm:text-xs">{activity.category} experience</span>

@@ -1,3 +1,4 @@
+import DiscGameScene from './DiscGameScene'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
@@ -28,58 +29,40 @@ export default function Layout({ children, path }) {
             <h2 className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-forest">Find us</h2>
             <address className="text-sm not-italic leading-6 text-forest/80"><a href="https://www.google.com/maps/place/Pawna+boating+camping/@18.6832061,73.5281079,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2a96d7997ae95:0x32392dd5e8767d68!8m2!3d18.6832061!4d73.5281079!16s%2Fg%2F11h3ldnpb4" target="_blank" rel="noopener noreferrer" className="underline decoration-current/30 underline-offset-4 hover:decoration-current">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</a></address>
           </div>
-        </div></Motion.nav>}</AnimatePresence></header>{!isHome && <div aria-hidden="true" className="h-16 sm:h-20" />}<main id="main-content">{children}</main><footer className="bg-forest bg-[linear-gradient(135deg,#12365b_0%,#163828_60%,#082c34_100%)] text-warm">
-      <div className="page-width py-6 sm:py-14">
-        <div className="flex flex-col gap-4 pb-6 sm:gap-8 sm:pb-10 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-4 sm:gap-6">
+        </div></Motion.nav>}</AnimatePresence></header>{!isHome && <div aria-hidden="true" className="h-16 sm:h-20" />}<main id="main-content">{children}</main><DiscGameScene /><footer className="border-t-8 border-[#F8C454] bg-gradient-to-b from-[#082b55] to-[#104b8c] text-white">
+      <div className="mx-auto max-w-[1600px] px-5 py-10 sm:px-8 sm:py-14 lg:px-12 lg:py-16">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr] lg:gap-12">
+          <div>
             <Logo />
-            <div>
-              <p className="font-display text-2xl sm:text-3xl">Pawna</p>
-              <p className="mt-1 text-xs leading-5 text-white/65 sm:text-sm">Boating &amp; Jungle River Camp</p>
+            <p className="mt-5 max-w-xs text-sm leading-7 text-white/85">Pawna Boating &amp; Jungle River Camp.<br />Your escape to stays, water and outdoor adventures.</p>
+            <div className="mt-6 flex gap-4" aria-label="Social links">
+              {[
+                { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/pawna.boating.camping' },
+                { label: 'WhatsApp', icon: 'chat', href: 'https://wa.me/919975212123' },
+                { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/pawnaboatingcamping' },
+              ].map(social => <a key={social.label} href={social.href} aria-label={social.label} target="_blank" rel="noopener noreferrer" className="inline-flex size-11 items-center justify-center text-white transition-colors hover:text-[#F8C454]"><Icon name={social.icon} className="size-6" /></a>)}
             </div>
           </div>
-          <div className="max-w-sm sm:text-right">
-            <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric sm:justify-end">Find us</h2>
-            <address className="text-sm not-italic leading-6 text-white/80"><a href="https://www.google.com/maps/place/Pawna+boating+camping/@18.6832061,73.5281079,17z/data=!3m1!4b1!4m6!3m5!1s0x3bc2a96d7997ae95:0x32392dd5e8767d68!8m2!3d18.6832061!4d73.5281079!16s%2Fg%2F11h3ldnpb4" target="_blank" rel="noopener noreferrer" className="underline decoration-current/30 underline-offset-4 hover:decoration-current">Pawna Dam, Pawna Riverside, Yelse Gaon, Lonavala</a></address>
-          </div>
-        </div>
-        <div className="grid gap-6 py-6 sm:gap-10 sm:py-10 md:grid-cols-[1fr_1.25fr] md:gap-16">
-          <div className="grid grid-cols-2 items-start gap-3 sm:gap-8">
-            <div className="min-w-0">
-            <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Explore Pawna</h2>
-            <nav aria-label="Footer navigation" className="grid gap-y-0 sm:gap-y-1">
-              {navigation.map(item => <Link key={item.path} to={item.path} className="flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-turmeric">{item.label}</Link>)}
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-[.16em] text-[#a9c1dc]">Explore Pawna</h2>
+            <nav aria-label="Footer navigation" className="mt-5 flex flex-col items-start gap-1">
+              {[...navigation, { path: '/stays', label: 'Our stays' }, { path: '/reviews', label: 'Guest reviews' }, { path: '/video-gallery', label: 'Video gallery' }].map(item => <Link key={item.path} to={item.path} className="inline-flex min-h-11 items-center text-sm text-white/90 hover:text-[#F8C454]">{item.label}</Link>)}
             </nav>
-            </div>
-            <div className="min-w-0">
-              <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Contact us</h2>
-              <div className="flex flex-wrap gap-x-5 md:flex-col md:items-start">
-                {bookingPhones.map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-white/80 transition-colors hover:text-turmeric"><Icon name="phone" className="size-4 shrink-0 text-turmeric" />{number}</a>)}
-              </div>
-              
+          </div>
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-[.16em] text-[#a9c1dc]">Bookings &amp; enquiries</h2>
+            <div className="mt-5 flex flex-col items-start gap-1">
+              {bookingPhones.map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-3 text-sm text-white/90 hover:text-[#F8C454]"><Icon name="phone" className="size-4" />{number}</a>)}
+              <a href="https://wa.me/918282841919" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center gap-3 text-sm text-white/90 hover:text-[#F8C454]"><Icon name="chat" className="size-4" />WhatsApp us</a>
             </div>
           </div>
-          <div className="self-start rounded-2xl border border-white/15 bg-white/5 p-4 sm:p-8">
-            <p className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Your next getaway</p>
-            <h2 className="font-display text-2xl leading-tight sm:text-3xl">Make time for the outdoors.</h2>
-            <p className="mt-3 max-w-md text-sm leading-6 text-white/65">Find your stay, pick your adventures, and bring your favourite people along.</p>
-            <div className="mt-4 sm:mt-6"><Button href="/plan-your-visit">Let’s make a plan</Button></div>
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-[.16em] text-[#a9c1dc]">Address &amp; timings</h2>
+            <address className="mt-6 text-sm not-italic leading-7 text-white/90"><a href="https://www.google.com/maps/search/?api=1&query=Pawna+Boating+Camping+Yelse" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[#F8C454]">Pawna Dam, Pawna Riverside,<br />Yelse Gaon, Lonavala ↗</a></address>
+            <div className="mt-5 space-y-2 text-sm leading-7 text-white/90"><p>Check-in: 4 pm onwards</p><p>Check-out: 11 am</p><p>Silent hours: 11:30 pm–8 am</p></div>
           </div>
         </div>
-        <section aria-labelledby="footer-social-heading" className="py-6 sm:py-8">
-          <h2 id="footer-social-heading" className="mb-4 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Stay connected</h2>
-          <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:gap-3">
-            {[
-              { label: 'Instagram', icon: 'instagram', href: 'https://www.instagram.com/pawna.boating.camping' },
-              { label: 'WhatsApp', icon: 'chat', href: 'https://wa.me/919975212123' },
-              { label: 'Facebook', icon: 'facebook', href: 'https://www.facebook.com/pawnaboatingcamping' },
-            ].map(social => <a key={social.label} href={social.href} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-full border border-white/20 px-2 text-[11px] text-white/85 transition-colors hover:border-turmeric hover:bg-white/5 hover:text-turmeric sm:gap-2 sm:px-4 sm:text-sm"><Icon name={social.icon} className="size-4 shrink-0" />{social.label}<Icon name="arrow" className="ml-1 hidden size-4 -rotate-45 sm:block" /></a>)}
-          </div>
-        </section>
-        <div className="flex flex-col gap-2 pt-4 sm:gap-3 sm:pt-6 text-xs leading-5 text-white/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Pawna. All rights reserved.</p>
-          <p className="flex items-center gap-2"><Icon name="sun" className="size-4 text-turmeric" /> Nature is calling. Take your time.</p>
-        </div>
+        <div className="mt-10 flex flex-col justify-between gap-2 text-xs leading-6 text-white/60 sm:mt-14 sm:flex-row"><p>© {new Date().getFullYear()} Pawna. All rights reserved.</p><p>Nature is calling. Take your time.</p></div>
       </div>
     </footer></>
 }

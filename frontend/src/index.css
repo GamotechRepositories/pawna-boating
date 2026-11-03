@@ -297,3 +297,40 @@
 .reviews-section { background-color: #dff5ff; background-image: linear-gradient(180deg, #78c7f2 0%, #dff5ff 55%, #faf6ed 100%); }
 .reviews-carousel { scrollbar-width: none; touch-action: pan-x pan-y pinch-zoom; overscroll-behavior: auto; }
 .reviews-carousel::-webkit-scrollbar { display: none; }
+
+.outdoor-games { position: relative; isolation: isolate; overflow: hidden; background: #fff4d6; }
+.outdoor-games-backdrop { position: absolute; inset: 0; z-index: -1; background-size: cover; background-position: center 65%; opacity: .28; }
+.outdoor-games::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, #fff4d6 0%, #fff4d6ed 28%, #f8e5a855 65%, #7e9a4355 100%); }
+.outdoor-games-eyebrow { display: flex; align-items: center; justify-content: center; gap: 1rem; color: #163828; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+.outdoor-games-eyebrow::before, .outdoor-games-eyebrow::after { content: ''; width: clamp(1rem, 10vw, 10rem); height: 1px; background: #163828; opacity: .6; }
+.outdoor-games-accent { position: relative; display: inline-block; color: #e76515; font-weight: 500; }
+.outdoor-games-accent::after { content: ''; position: absolute; bottom: -.15em; left: 10%; width: 85%; height: .15em; border-top: 3px solid #e76515; border-radius: 50%; transform: rotate(-2deg); }
+.outdoor-games-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem 1rem; margin-top: 2.5rem; padding-inline: .5rem; }
+.outdoor-game-card { min-width: 0; border: 1px solid #ffffffd9; border-radius: 2rem 2.5rem 2rem 2rem; background: linear-gradient(150deg, #fffef8f5, #fffbedaa); box-shadow: 6px 7px 0 #f8c454, 0 14px 25px #66501712; transform: skewX(-6deg); }
+.outdoor-game-content { padding: 1rem .5rem 0; transform: skewX(6deg); }
+.outdoor-game-player { display: block; width: 100%; height: 15rem; object-fit: contain; object-position: bottom; }
+.outdoor-game-card:last-child { grid-column: 1 / -1; width: calc(50% - .5rem); justify-self: center; }
+.outdoor-games-location { position: relative; border-top: 7px solid #fff2b2; background: linear-gradient(110deg, #ffd02e, #ffe37b 55%, #f8c454); border-radius: 45% 35% 0 0 / 20px 20px 0 0; }
+@media (min-width: 640px) {
+  .outdoor-games-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+  .outdoor-game-card:last-child { grid-column: auto; width: 100%; }
+  .outdoor-game-player { height: clamp(15rem, 25vw, 25rem); }
+  .outdoor-game-content { padding-top: 1.25rem; }
+}
+
+@media (max-width: 639px) {
+  .outdoor-games-grid { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin: 2rem auto 0; gap: 1.25rem; padding-inline: .5rem; }
+  .outdoor-game-card { border-radius: 2.5rem; box-shadow: 6px 7px 0 #f8c454, 0 14px 25px #66501712; }
+  .outdoor-game-content { display: flex; align-items: center; justify-content: space-between; height: 110px; padding: 0 1rem; }
+  .outdoor-game-content h3 { justify-content: flex-start; gap: .75rem; font-size: 1rem; }
+  .outdoor-game-content h3 > span { width: 2.5rem; height: 2.5rem; }
+  .outdoor-game-content h3 svg, .outdoor-game-content h3 img, .outdoor-game-content h3 span > span { width: 1.25rem; height: 1.25rem; }
+  .outdoor-game-player { width: 40%; height: 140px; align-self: flex-end; object-position: center; }
+  .outdoor-game-card:last-child { width: 100%; grid-column: auto; }
+}
+
+@media (min-width: 1024px) {
+  .outdoor-game-player { height: clamp(15rem, 25vw, 25rem); transform: scale(1.3); transform-origin: center bottom; }
+  .outdoor-game-content { overflow: hidden; }
+}
+

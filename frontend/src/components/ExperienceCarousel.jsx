@@ -23,7 +23,6 @@ export default function ExperienceCarousel({ items }) {
         }
       }}
     >
-      <p className="mb-2 text-center text-xs text-forest/65">Choose an experience. Swipe or use the arrows to explore.</p>
       <div className="experience-stage" {...gestureHandlers}>
         {hasNeighbors && <button
           type="button"
@@ -31,7 +30,7 @@ export default function ExperienceCarousel({ items }) {
           aria-label={`Previous experience: ${items[previous].name}`}
           onClick={() => move(-1)}
         >
-          <div className="experience-preview" aria-hidden="true"><ExperienceCard activity={items[previous]} /></div>
+          <div className="experience-preview" aria-hidden="true"><ExperienceCard key={items[index].name} activity={items[previous]} videoActivity={items[index]} /></div>
         </button>}
         <article
           className="experience-slide experience-slide-current"
@@ -46,7 +45,7 @@ export default function ExperienceCarousel({ items }) {
             animate={{ opacity: 1, rotateY: 0, scale: 1 }}
             transition={{ duration: reducedMotion ? 0 : 0.65, ease: [0.25, 0.1, 0.25, 1] }}
           >
-            <ExperienceCard activity={items[index]} active />
+            <ExperienceCard activity={items[index]} videoActivity={items[index]} active />
           </Motion.div>
         </article>
         {hasNeighbors && <button
@@ -55,13 +54,13 @@ export default function ExperienceCarousel({ items }) {
           aria-label={`Next experience: ${items[next].name}`}
           onClick={() => move(1)}
         >
-          <div className="experience-preview" aria-hidden="true"><ExperienceCard activity={items[next]} /></div>
+          <div className="experience-preview" aria-hidden="true"><ExperienceCard key={items[index].name} activity={items[next]} videoActivity={items[index]} /></div>
         </button>}
       </div>
       <div className="mt-4 flex items-center justify-center gap-5 sm:gap-8">
-        <button type="button" onClick={() => move(-1)} disabled={!hasNeighbors} aria-label="Previous experience" className="flex size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon className="size-5 rotate-180" /></button>
+        <button type="button" onClick={() => move(-1)} disabled={!hasNeighbors} aria-label="Previous experience" className="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon className="size-4 rotate-180 sm:size-5" /></button>
         <p aria-live="polite" aria-atomic="true" className="min-w-28 text-center text-[13px] sm:text-sm font-semibold text-mountain">{String(index + 1).padStart(2, '0')} <span className="mx-2 font-normal text-forest/50">/</span> {String(items.length).padStart(2, '0')}</p>
-        <button type="button" onClick={() => move(1)} disabled={!hasNeighbors} aria-label="Next experience" className="flex size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon /></button>
+        <button type="button" onClick={() => move(1)} disabled={!hasNeighbors} aria-label="Next experience" className="flex size-9 sm:size-12 shrink-0 items-center justify-center rounded-full border border-jungle text-jungle transition-colors hover:bg-jungle hover:text-white disabled:opacity-40"><Icon className="size-4 sm:size-5" /></button>
       </div>
     </div>
   )

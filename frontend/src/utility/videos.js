@@ -5,6 +5,7 @@ import lakeVideo from '../assets/LakeV.mp4'
 import getawayVideo from '../assets/MixV.mp4'
 import playVideo from '../assets/PlayV.mp4'
 import poolVideo from '../assets/PoolV.mp4'
+import newPoolVideo from '../assets/newPool.mp4'
 import getawayPoster from '../assets/home.png'
 
 export const getawayVideos = [
@@ -45,5 +46,11 @@ export const getawayVideos = [
     src: poolVideo,
     title: 'Poolside moments',
     description: 'A splash of fun for your next getaway.',
+  },
+  {
+    id: 'pawna-new-pool',
+    src: newPoolVideo,
+    title: 'A refreshing escape',
+    description: 'Enjoy a refreshing break in the swimming pool at Pawna.',
   },
 ]
