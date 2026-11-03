@@ -9,7 +9,7 @@ export default function ExperiencesPage() {
   const visible = activities.filter(item => filter === 'All' || item.category === filter)
 
   return (
-    <section className="page-width py-16 md:py-24">
+    <section className="page-width pb-16 pt-4 md:pb-24 md:pt-6">
       <div className="experience-filters" aria-label="Filter experiences">
         {['All', 'Water', 'Games', 'Family'].map(category => <button
           key={category}

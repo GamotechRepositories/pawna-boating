@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion as Motion, useReducedMotion } from 'motion/react'
 import { useEffect, useState } from 'react'
-import { navigation } from '../utility/content'
+import { navigation, bookingPhones } from '../utility/content'
 import Icon from './Icon'
 import Button from './Button'
 import Logo from './Logo'
@@ -16,11 +17,11 @@ export default function Layout({ children, path }) {
     window.addEventListener('scroll', updateScroll, { passive: true })
     return () => window.removeEventListener('scroll', updateScroll)
   }, [])
-  return <><a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:p-4">Skip to content</a><header className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${transparentHeader ? 'bg-gradient-to-b from-forest/85 to-transparent text-white' : 'bg-warm text-forest'}`}><div className="page-width flex h-16 items-center sm:h-20 justify-between gap-5"><Logo /><nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">{navigation.map(item => <a key={item.path} href={item.path} aria-current={path === item.path ? 'page' : undefined} className={`py-2 text-[13px] sm:text-sm font-medium ${transparentHeader ? (path === item.path ? 'border-b-2 border-primary text-white' : 'text-white/85 hover:text-secondary') : (path === item.path ? 'border-b-2 border-primary text-mountain' : 'text-forest/75 hover:text-jungle')}`}>{item.label}</a>)}</nav><div className="hidden sm:block"><Button href="/plan-your-visit">Plan your escape</Button></div><button className="p-3 lg:hidden" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}><Icon name={open ? 'close' : 'menu'} /></button></div><AnimatePresence>{open && <Motion.nav initial={{ opacity: 0, y: reducedMotion ? 0 : -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reducedMotion ? 0 : -8 }} transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }} id="mobile-nav" aria-label="Mobile navigation" className="flex h-[calc(100dvh-4rem)] w-full flex-col overflow-y-auto bg-warm px-5 pb-6 text-forest sm:h-[calc(100dvh-5rem)] sm:px-8 lg:hidden">{navigation.map(item => <a key={item.path} href={item.path} aria-current={path === item.path ? 'page' : undefined} onClick={() => setOpen(false)} className="border-b border-forest/20 px-3 py-5 text-base font-medium transition-colors hover:bg-sand">{item.label}</a>)}<div className="mt-auto space-y-6 px-3 pt-10 pb-4">
+  return <><a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:p-4">Skip to content</a><header className={`fixed inset-x-0 top-0 z-40 transition-colors duration-300 ${transparentHeader ? 'bg-gradient-to-b from-forest/85 to-transparent text-white' : 'bg-warm text-forest'}`}><div className="page-width flex h-16 items-center sm:h-20 justify-between gap-5"><Logo /><nav aria-label="Main navigation" className="hidden items-center gap-8 lg:flex">{navigation.map(item => <Link key={item.path} to={item.path} aria-current={path === item.path ? 'page' : undefined} className={`py-2 text-[13px] sm:text-sm font-medium ${transparentHeader ? (path === item.path ? 'border-b-2 border-primary text-white' : 'text-white/85 hover:text-secondary') : (path === item.path ? 'border-b-2 border-primary text-mountain' : 'text-forest/75 hover:text-jungle')}`}>{item.label}</Link>)}</nav><div className="hidden sm:block"><Button href="/plan-your-visit">Plan your escape</Button></div><button className="p-3 lg:hidden" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} aria-controls="mobile-nav" onClick={() => setOpen(!open)}><Icon name={open ? 'close' : 'menu'} /></button></div><AnimatePresence>{open && <Motion.nav initial={{ opacity: 0, y: reducedMotion ? 0 : -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reducedMotion ? 0 : -8 }} transition={{ duration: reducedMotion ? 0 : 0.5, ease: [0.25, 0.1, 0.25, 1] }} id="mobile-nav" aria-label="Mobile navigation" className="flex h-[calc(100dvh-4rem)] w-full flex-col overflow-y-auto bg-warm px-5 pb-6 text-forest sm:h-[calc(100dvh-5rem)] sm:px-8 lg:hidden">{navigation.map(item => <Link key={item.path} to={item.path} aria-current={path === item.path ? 'page' : undefined} onClick={() => setOpen(false)} className="border-b border-forest/20 px-3 py-5 text-base font-medium transition-colors hover:bg-sand">{item.label}</Link>)}<div className="mt-auto space-y-6 px-3 pt-10 pb-4">
           <div>
             <h2 className="mb-3 text-xs font-bold uppercase tracking-[.18em] text-forest">Contact us</h2>
             <div className="flex flex-col items-start">
-              {['9975212123', '9689151919', '9823900620'].map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center text-sm text-forest/80 hover:text-jungle">{number}</a>)}
+              {bookingPhones.map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center text-sm text-forest/80 hover:text-jungle">{number}</a>)}
             </div>
           </div>
           <div>
@@ -47,13 +48,13 @@ export default function Layout({ children, path }) {
             <div className="min-w-0">
             <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Explore Pawna</h2>
             <nav aria-label="Footer navigation" className="grid gap-y-0 sm:gap-y-1">
-              {navigation.map(item => <a key={item.path} href={item.path} className="flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-turmeric">{item.label}</a>)}
+              {navigation.map(item => <Link key={item.path} to={item.path} className="flex min-h-11 items-center text-sm text-white/80 transition-colors hover:text-turmeric">{item.label}</Link>)}
             </nav>
             </div>
             <div className="min-w-0">
               <h2 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-[.18em] text-turmeric">Contact us</h2>
               <div className="flex flex-wrap gap-x-5 md:flex-col md:items-start">
-                {['9975212123', '9689151919', '9823900620'].map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-white/80 transition-colors hover:text-turmeric"><Icon name="phone" className="size-4 shrink-0 text-turmeric" />{number}</a>)}
+                {bookingPhones.map(number => <a key={number} href={`tel:+91${number}`} className="inline-flex min-h-11 items-center gap-2 text-sm text-white/80 transition-colors hover:text-turmeric"><Icon name="phone" className="size-4 shrink-0 text-turmeric" />{number}</a>)}
               </div>
               
             </div>

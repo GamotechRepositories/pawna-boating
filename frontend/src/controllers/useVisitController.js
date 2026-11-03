@@ -6,7 +6,7 @@ const storageKey = 'paluma-visit-plan'
 export default function useVisitController() {
   const [values, setValues] = useState(() => {
     const selected = new URLSearchParams(window.location.search).get('stay')
-    const initial = { name: '', email: '', date: '', guests: '2', stay: stays.some(item => item.id === selected) ? selected : 'camping', notes: '' }
+    const initial = { name: '', phone: '', email: '', date: '', guests: '2', stay: stays.some(item => item.id === selected) ? selected : 'camping', notes: '' }
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey))
       if (saved && typeof saved === 'object') {
@@ -37,7 +37,7 @@ export default function useVisitController() {
   }
   function download() {
     const stay = stays.find(item => item.id === values.stay)?.name || values.stay
-    const contents = `PALUMA — VISIT PLAN\n\nName: ${values.name}\nEmail: ${values.email}\nPreferred date: ${values.date}\nGuests: ${values.guests}\nStay: ${stay}\nNotes: ${values.notes}\n\nThis is a personal plan, not a confirmed reservation. Contact the camp to check availability and rates.`
+    const contents = `PAWNA BOATING & JUNGLE RIVER CAMP — VISIT PLAN\n\nName: ${values.name}\nPhone: ${values.phone}\nEmail: ${values.email}\nPreferred date: ${values.date}\nGuests: ${values.guests}\nStay: ${stay}\nNotes: ${values.notes}\n\nThis is a personal plan, not a confirmed reservation. Contact the camp to check availability and rates.`
     const url = URL.createObjectURL(new Blob([contents], { type: 'text/plain' }))
     const link = document.createElement('a')
     link.href = url

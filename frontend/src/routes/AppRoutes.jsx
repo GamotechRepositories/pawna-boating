@@ -1,8 +1,9 @@
 import { motion as Motion, useReducedMotion } from 'motion/react'
-import { getRoute } from './routeConfig'
+import { Routes, Route } from 'react-router-dom'
+import NotFoundPage from '../pages/NotFoundPage'
+import { routes } from './routeConfig'
 
 export default function AppRoutes({ path }) {
-  const Page = getRoute(path).component
   const reducedMotion = useReducedMotion()
   return (
     <Motion.div
@@ -11,7 +12,10 @@ export default function AppRoutes({ path }) {
       animate={{ opacity: 1 }}
       transition={{ duration: reducedMotion ? 0 : 0.8, ease: [0.25, 0.1, 0.25, 1] }}
     >
-      <Page />
+      <Routes>
+        {Object.entries(routes).map(([routePath, { component: Page }]) => <Route key={routePath} path={routePath} element={<Page />} />)}
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </Motion.div>
   )
 }

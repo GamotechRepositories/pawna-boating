@@ -1,9 +1,10 @@
+import { Link } from 'react-router-dom'
 import pawnaLogo from '../assets/pawnaLogo-Photoroom.png'
 
 export default function Logo({ footer = false }) {
   return (
-    <a
-      href="/"
+    <Link
+      to="/"
       aria-label="Pawna Boating & Jungle River Camp home"
       className={`inline-flex shrink-0 items-center justify-center rounded-lg ${footer ? 'p-3' : 'p-1'}`}
     >
@@ -14,6 +15,6 @@ export default function Logo({ footer = false }) {
         height="937"
         className={`w-auto object-contain ${footer ? 'h-32' : 'h-12 sm:h-16'}`}
       />
-    </a>
+    </Link>
   )
 }
