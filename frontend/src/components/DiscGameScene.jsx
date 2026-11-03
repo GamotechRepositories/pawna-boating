@@ -17,7 +17,7 @@ const games = [
 export default function DiscGameScene() {
   return <section className="outdoor-games" aria-labelledby="outdoor-games-title">
     <div className="outdoor-games-backdrop" style={{ backgroundImage: `url(${landscape})` }} aria-hidden="true" />
-    <div className="relative mx-auto max-w-[1600px] px-5 pb-12 pt-10 sm:px-10 sm:pt-14 lg:px-14">
+    <div className="relative mx-auto max-w-[1600px] px-3 pb-12 pt-10 sm:px-10 sm:pt-14 lg:px-14">
       <div className="text-center">
         <p className="outdoor-games-eyebrow">More games. More memories.</p>
         <h2 id="outdoor-games-title" className="mt-3 font-display text-3xl font-semibold leading-tight text-[#163828] sm:text-5xl lg:text-6xl">Outdoor Fun &amp; <em className="outdoor-games-accent">Adventure</em></h2>

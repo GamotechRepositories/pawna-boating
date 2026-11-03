@@ -57,9 +57,9 @@ export default function HangingPhotoGallery({ images }) {
             </g>
           </svg>
         </div>
-      <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-7xl items-center gap-6 px-5 py-6 sm:px-10 md:grid-cols-2 md:gap-16 md:py-10">
+      <div className="mx-auto grid min-h-[calc(100svh-5rem)] max-w-7xl items-center gap-6 px-3 py-6 sm:px-10 md:grid-cols-2 md:gap-16 md:py-10">
         <div className="max-w-xl">
-          <p className="mb-5 w-fit rounded-full border border-[#12365b] bg-white px-5 py-2 text-sm font-extrabold text-[#07366B]">Moments from the getaway</p>
+          <p className="mb-5 w-fit rounded-full border border-[#12365b] bg-white px-3 py-2 sm:px-5 text-sm font-extrabold text-[#07366B]">Moments from the getaway</p>
           <h2 className="text-white font-sans text-[clamp(1.5rem,3.2vw,3rem)] font-black uppercase leading-tight">
             <span className="block whitespace-nowrap text-[clamp(1.25rem,4.6vw,2.25rem)] tracking-tight">See the moments.</span>
             <span className="mt-2 inline-block -skew-x-6 bg-[#F8C454] px-3 py-1 text-black"><span className="inline-block skew-x-6">Feel the escape.</span></span>

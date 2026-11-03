@@ -19,7 +19,7 @@ export default function ImageCarousel({ images, className = '' }) {
         }
       }}
     >
-      <div className="isolate grid px-8 pb-10 pt-6 sm:px-12 sm:pt-8">
+      <div className="isolate grid px-6 pb-10 pt-6 sm:px-12 sm:pt-8">
         {images.map((image, slideIndex) => {
           const isFront = current === slideIndex
           return <button

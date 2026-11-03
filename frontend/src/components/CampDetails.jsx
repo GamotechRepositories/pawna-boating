@@ -35,7 +35,7 @@ const schedule = [
 export function CampFacilities({ stay }) {
   const selectedPackage = stay ? stayPackages[stay.id] : null
   const inclusions = selectedPackage?.inclusions || facilities
-  return <section className="rounded-2xl border border-sand bg-white p-6 sm:p-10" aria-labelledby="facilities-heading">
+  return <section className="rounded-2xl border border-sand bg-white p-6 max-sm:px-3 sm:p-10" aria-labelledby="facilities-heading">
     <h2 id="facilities-heading" className="font-display text-2xl text-mountain sm:text-3xl">{selectedPackage?.title || 'Our camping packages'}</h2>
     {selectedPackage && <div className="mt-3"><p className="text-lg font-semibold text-mountain">₹{stay.price} <span className="text-sm font-normal text-forest/75">{stay.priceUnit}</span></p><p className="mt-2 text-sm text-forest/80">{selectedPackage.accommodation}</p></div>}
     <p className="mt-3 max-w-2xl text-sm leading-7 text-forest/80">Pawna Boating &amp; Jungle River Camp, Yelse, Pawna. Spread across 2 acres, with a swimming pool, boating, a dance floor and a kids play area.</p>
@@ -47,11 +47,11 @@ export default function CampDetails({ stay }) {
   return <div className="mt-12 space-y-8">
     <CampFacilities stay={stay} />
     <div className="grid items-start gap-8 lg:grid-cols-2">
-      <section className="rounded-2xl bg-river-surface p-6 sm:p-10" aria-labelledby="schedule-heading">
+      <section className="rounded-2xl bg-river-surface p-6 max-sm:px-3 sm:p-10" aria-labelledby="schedule-heading">
         <h2 id="schedule-heading" className="flex items-center gap-3 font-display text-2xl text-mountain sm:text-3xl"><Icon name="clock" className="size-6 shrink-0 text-jungle" />Your stay schedule</h2>
         <dl className="mt-6 divide-y divide-jungle/15">{schedule.map(([label, time, icon]) => <div key={label} className="flex flex-wrap justify-between gap-x-4 gap-y-1 py-4 text-sm leading-6"><dt className="flex items-center gap-3"><Icon name={icon} className="size-5 shrink-0 text-jungle" />{label}</dt><dd className="font-semibold text-jungle">{time}</dd></div>)}</dl>
       </section>
-      <section className="rounded-2xl border border-sand bg-white p-6 sm:p-10" aria-labelledby="policy-heading">
+      <section className="rounded-2xl border border-sand bg-white p-6 max-sm:px-3 sm:p-10" aria-labelledby="policy-heading">
         <h2 id="policy-heading" className="flex items-center gap-3 font-display text-2xl text-mountain sm:text-3xl"><Icon name="shield" className="size-6 shrink-0 text-jungle" />Booking &amp; cancellation policy</h2>
         <ul className="mt-6 list-disc space-y-4 pl-5 text-sm leading-7">
           <li>A 50% advance payment is required to confirm your booking.</li>

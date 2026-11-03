@@ -10,7 +10,7 @@ export default function StayCard({ stay, index, title = stay.name, showBonfire =
           <div className="overflow-hidden bg-sand">
             <img src={stay.image} alt={`${stay.name} inspiration — illustrative photography`} loading="lazy" className="aspect-[4/4.5] w-full object-cover transition-transform duration-1000 ease-in-out motion-safe:group-hover:scale-105" />
           </div>
-          <div className="relative z-10 -mt-7  bg-white px-3 py-2 text-center ">
+          <div className="relative z-10 -mt-7  bg-white px-2 py-2 sm:px-3 text-center ">
             <h3 className="flex flex-wrap items-baseline justify-center gap-x-2 gap-y-1  text-base leading-tight  font-semibold">
               <span>{title}</span>
               <span className="whitespace-nowrap">₹{stay.price}</span>

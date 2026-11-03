@@ -18,7 +18,7 @@ export default function StayDetailsPage() {
   return <section className="page-width pb-12 pt-4 md:pb-20 md:pt-6">
     <div className="grid overflow-hidden rounded-2xl border border-sand bg-white shadow-sm lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
       <StayGallery key={stay.id} name={stay.id === 'villa' ? 'Villa Stay' : stay.name} images={stay.id === 'villa' ? [stay.image, villaOne, villaTwo, villaFour] : [stay.image]} />
-      <div className="min-w-0 self-center p-5 sm:p-6 lg:p-8">
+      <div className="min-w-0 self-center px-3 py-5 sm:p-6 lg:p-8">
         {stay.tag && <p className="text-xs font-semibold uppercase tracking-widest text-jungle">{stay.tag}</p>}
         <h1 className={`${stay.tag ? 'mt-2' : ''} font-display text-2xl leading-tight text-balance text-mountain sm:text-3xl lg:text-4xl`}>{stay.name}</h1>
         <p className="mt-5 flex flex-wrap items-baseline gap-x-2 gap-y-1 text-3xl font-semibold tabular-nums text-mountain">₹{stay.price}<span className="text-sm font-normal text-forest/75">{stay.priceUnit}</span></p>

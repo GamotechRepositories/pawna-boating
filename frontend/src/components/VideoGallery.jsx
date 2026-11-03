@@ -121,7 +121,7 @@ export default function VideoGallery({
         ) : (
           <div className="rounded-2xl border border-forest/15">
             {previewImage && <img src={previewImage} alt={previewAlt} loading="lazy" className="mx-auto h-auto w-full max-w-2xl" />}
-            <p className="px-6 py-8 text-center text-forest/75">New moments are on their way. Check back soon for videos from the getaway.</p>
+            <p className="px-3 py-8 text-center sm:px-6 text-forest/75">New moments are on their way. Check back soon for videos from the getaway.</p>
           </div>
         )}
       </div>

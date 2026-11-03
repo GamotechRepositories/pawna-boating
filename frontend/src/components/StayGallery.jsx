@@ -11,7 +11,7 @@ export default function StayGallery({ images, name }) {
         <img id={imageId} src={images[index]} alt={`${name} — photo ${index + 1} of ${images.length}`} className="h-72 w-full object-contain sm:h-96" />
         {hasMultipleImages && <p aria-live="polite" aria-atomic="true" className="absolute bottom-3 right-3 rounded-full bg-forest/85 px-3 py-1.5 text-xs font-semibold tabular-nums text-white">{index + 1} / {images.length}</p>}
       </div>
-      {hasMultipleImages && <div className="border-t border-sand px-3 py-3 sm:px-4">
+      {hasMultipleImages && <div className="border-t border-sand px-2 py-3 sm:px-4">
         <div className="grid grid-cols-4 gap-2 lg:flex lg:justify-center" role="group" aria-label="Choose a stay photo">
           {images.map((src, photoIndex) => <button
             key={src}
