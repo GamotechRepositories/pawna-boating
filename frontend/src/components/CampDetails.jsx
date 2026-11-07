@@ -54,7 +54,7 @@ export default function CampDetails({ stay }) {
       <section className="rounded-2xl border border-sand bg-white p-6 max-sm:px-3 sm:p-10" aria-labelledby="policy-heading">
         <h2 id="policy-heading" className="flex items-center gap-3 font-display text-2xl text-mountain sm:text-3xl"><Icon name="shield" className="size-6 shrink-0 text-jungle" />Booking &amp; cancellation policy</h2>
         <ul className="mt-6 list-disc space-y-4 pl-5 text-sm leading-7">
-          <li>A 50% advance payment is required to confirm your booking.</li>
+          <li>Online checkout collects the full package amount. The camp confirms availability and your booking separately.</li>
           <li>For last-minute cancellations, the booking amount is non-refundable. You may postpone your stay within the next 3 months using the same booking amount.</li>
           <li>Children above 5 years are charged.</li>
           <li>Prices may vary on weekends, national holidays and special days.</li>

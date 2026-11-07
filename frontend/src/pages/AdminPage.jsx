@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import AdminBookings from '../components/AdminBookings'
 import { supabase } from '../services/supabase'
 import { sections, editValues, buildPayload } from '../utility/adminContent'
 
@@ -86,6 +87,14 @@ function ContentManager() {
   </>
 }
 
+function AdminDashboard() {
+  const [section, setSection] = useState('bookings')
+  return <><nav aria-label="Admin workspace" className="mb-8 flex flex-wrap gap-3">{['bookings', 'content'].map(value => <button key={value} className={section === value ? primary : button} aria-current={section === value ? 'page' : undefined} onClick={() => {
+    if (section === 'content' && value !== section && !window.confirm('Leave content editing? Unsaved changes will be discarded.')) return
+    setSection(value)
+  }}>{value === 'bookings' ? 'Bookings' : 'Website content'}</button>)}</nav>{section === 'bookings' ? <AdminBookings /> : <ContentManager />}</>
+}
+
 export default function AdminPage() {
   const [session, setSession] = useState(null)
   const [authReady, setAuthReady] = useState(false)
@@ -126,10 +135,10 @@ export default function AdminPage() {
     } catch (error) { setError(error.message) }
     finally { setBusy(false) }
   }
-  return <div className="min-h-screen bg-river-surface text-forest"><header className="border-b border-sand bg-white"><div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-8"><div><p className="text-xs font-semibold uppercase tracking-widest text-jungle">Pawna Boating & Jungle River Camp</p><h1 className="mt-1 font-display text-2xl sm:text-3xl">Content admin</h1></div><div className="flex flex-wrap items-center gap-3"><Link to="/" className={button}>View website</Link>{session && <button className={button} disabled={busy} onClick={logout}>Sign out</button>}</div></div></header>
+  return <div className="min-h-screen bg-river-surface text-forest"><header className="border-b border-sand bg-white"><div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-4 py-5 sm:px-8"><div><p className="text-xs font-semibold uppercase tracking-widest text-jungle">Pawna Boating & Jungle River Camp</p><h1 className="mt-1 font-display text-2xl sm:text-3xl">Camp admin</h1></div><div className="flex flex-wrap items-center gap-3"><Link to="/" className={button}>View website</Link>{session && <button className={button} disabled={busy} onClick={logout}>Sign out</button>}</div></div></header>
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-8 sm:py-12">
       {error && <p role="alert" className="mb-5 text-red-700">{error}</p>}
       {!supabase ? <p>Configure the Supabase URL and publishable key to use the admin panel.</p> : !authReady ? <p role="status">Checking sign-in…</p> : !session ? <form onSubmit={login} className="mx-auto max-w-md rounded-2xl border border-sand bg-white p-6 sm:p-8"><h2 className="font-display text-2xl">Welcome back</h2><p className="mt-2 text-sm text-forest/70">Sign in with your approved admin account.</p><fieldset disabled={busy} className="mt-6 space-y-5"><label className="field-label">Email<input type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} /></label><label className="field-label">Password<input type="password" autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} /></label><button className={`${primary} w-full`}>{busy ? 'Signing in…' : 'Sign in'}</button></fieldset></form>
-        : access.userId !== userId ? <p role="status">Checking admin access…</p> : !access.allowed ? <div className="rounded-xl border border-sand bg-white p-6"><h2 className="text-xl font-semibold">Admin access required</h2><p className="mt-3">Your account is signed in but does not have access to this panel. Ask the project owner to approve your account.</p>{access.error && <p role="alert" className="mt-3 text-red-700">Access check failed. Ensure the admin migration has been applied, then reload.</p>}</div> : <ContentManager key={userId} />}
+        : access.userId !== userId ? <p role="status">Checking admin access…</p> : !access.allowed ? <div className="rounded-xl border border-sand bg-white p-6"><h2 className="text-xl font-semibold">Admin access required</h2><p className="mt-3">Your account is signed in but does not have access to this panel. Ask the project owner to approve your account.</p>{access.error && <p role="alert" className="mt-3 text-red-700">Access check failed. Ensure the admin migration has been applied, then reload.</p>}</div> : <AdminDashboard key={userId} />}
     </main></div>
 }

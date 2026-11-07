@@ -6,9 +6,9 @@
 2. Run `migrations/202611070001_content_api.sql` once. It creates all three tables, API grants, indexes, and row level security policies in a transaction. It intentionally fails if these tables already exist rather than altering existing data.
 3. Run `seed.sql` to import the current frontend content: four stays, seven videos, and nine review excerpts. Seeds can be rerun without duplicating IDs or overwriting dashboard edits.
 4. Ensure the Data API is enabled and `public` is an exposed schema in the project API settings.
-5. In Table Editor, edit content and toggle `is_published` to publish/hide it. New records default to hidden. The dashboard can manage content; browser users cannot create, edit, or delete it.
+5. In Table Editor, edit content and toggle `is_published` to publish/hide it. New records default to hidden. The dashboard can manage content; public visitors cannot create, edit, or delete it. Approved admins can use the admin panel after its migration.
 
-The frontend now reads these tables using the REST API. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in `frontend/.env.local` (see `frontend/.env.example`), then restart Vite. Only the publishable key belongs in browser configuration. Without API configuration, the site uses its original local content. With API configuration, it shows loading/error states and respects empty results rather than restoring hidden records from local data. The visit planner continues saving plans locally; it does not create bookings in Supabase.
+The frontend now reads these tables using the REST API. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in `frontend/.env.local` (see `frontend/.env.example`), then restart Vite. Only the publishable key belongs in browser configuration. Without API configuration, the site uses its original local content. With API configuration, it shows loading/error states and respects empty results rather than restoring hidden records from local data. The booking form now uses server-side Razorpay checkout after the booking migration and Edge Functions are deployed. See [booking setup](BOOKINGS.md).
 
 ## Images and videos
 
@@ -49,7 +49,7 @@ Frontend mapping:
 
 ## Access and verification
 
-Public and signed-in clients can read only published rows. No client write grants or write policies are provided. This is a curated review API; public review submission is outside this setup and requires a moderated submission design.
+Visitors and ordinary signed-in accounts can read only published content. Approved admins can manage content after the admin migration. This is a curated review API; public review submission is outside this setup and requires a moderated submission design.
 
 After running the SQL, verify with the publishable key:
 
@@ -66,7 +66,7 @@ References: [Supabase REST API security](https://supabase.com/docs/guides/api/se
 
 ## Admin panel
 
-The panel is at `/admin` (locally, usually `http://localhost:5173/admin`). It uses email/password Supabase Auth and an admin allowlist enforced by database RLS. The browser uses only your existing publishable key.
+The panel includes Bookings and Website content. Bookings require the additional setup in [BOOKINGS.md](BOOKINGS.md). The panel is at `/admin` (locally, usually `http://localhost:5173/admin`). It uses email/password Supabase Auth and an admin allowlist enforced by database RLS. The browser uses only your existing publishable key.
 
 One-time setup:
 
