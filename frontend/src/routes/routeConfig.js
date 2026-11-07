@@ -1,3 +1,4 @@
+import { lazy } from 'react'
 import { matchPath } from 'react-router-dom'
 import StayDetailsPage from '../pages/StayDetailsPage'
 import { stays } from '../utility/content'
@@ -9,7 +10,10 @@ import VideoGalleryPage from '../pages/VideoGalleryPage'
 import ReviewsPage from '../pages/ReviewsPage'
 import NotFoundPage from '../pages/NotFoundPage'
 
+const AdminPage = lazy(() => import('../pages/AdminPage'))
+
 export const routes = {
+  '/admin': { component: AdminPage, title: 'Content Admin' },
   '/': { component: HomePage, title: 'Boating & Jungle River Camp' },
   '/stays/:stayId': { component: StayDetailsPage, title: 'Stay Details' },
   '/stays': { component: StaysPage, title: 'Our Stays' },
