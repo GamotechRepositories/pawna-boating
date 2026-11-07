@@ -1,0 +1,5 @@
+# Local Supabase credentials
+/.txt
+.env
+.env.*
+!.env.example

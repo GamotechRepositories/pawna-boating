@@ -3,7 +3,7 @@ import villaOne from '../assets/villa-1.jpg'
 import villaTwo from '../assets/villa-02.jpg'
 import villaFour from '../assets/villa-04.jpg'
 import { useParams } from 'react-router-dom'
-import { stays } from '../utility/content'
+import { useContent } from '../controllers/useContent'
 import Button from '../components/Button'
 import Icon from '../components/Icon'
 import CampDetails from '../components/CampDetails'
@@ -11,8 +11,11 @@ import StayCard from '../components/StayCard'
 import NotFoundPage from './NotFoundPage'
 
 export default function StayDetailsPage() {
+  const { data: stays, loading: staysLoading, error: staysError } = useContent('staying_experiences')
   const { stayId } = useParams()
   const stay = stays.find(item => item.id === stayId)
+  if (staysLoading) return <p role="status" className="page-width py-12">Loading stay…</p>
+  if (staysError) return <p role="status" className="page-width py-12">{staysError}</p>
   if (!stay) return <NotFoundPage />
 
   return <section className="page-width pb-12 pt-4 md:pb-20 md:pt-6">

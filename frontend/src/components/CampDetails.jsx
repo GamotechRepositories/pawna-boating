@@ -33,7 +33,7 @@ const schedule = [
 ]
 
 export function CampFacilities({ stay }) {
-  const selectedPackage = stay ? stayPackages[stay.id] : null
+  const selectedPackage = stay ? (stay.package || stayPackages[stay.id]) : null
   const inclusions = selectedPackage?.inclusions || facilities
   return <section className="rounded-2xl border border-sand bg-white p-6 max-sm:px-3 sm:p-10" aria-labelledby="facilities-heading">
     <h2 id="facilities-heading" className="font-display text-2xl text-mountain sm:text-3xl">{selectedPackage?.title || 'Our camping packages'}</h2>

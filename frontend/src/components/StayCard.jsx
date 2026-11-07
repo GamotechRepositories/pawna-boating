@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import Reveal from './Reveal'
-export default function StayCard({ stay, index, title = stay.name, showBonfire = true, carousel = false }) {
+export default function StayCard({ stay, index, title = stay.name, carousel = false }) {
   const Wrapper = carousel ? 'div' : Reveal
   const wrapperProps = carousel ? {} : { className: 'h-full', delay: Math.min(index, 3) * 0.14 }
   return <Wrapper {...wrapperProps}>

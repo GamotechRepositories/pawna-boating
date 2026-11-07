@@ -1,17 +1,18 @@
 import { useState } from 'react'
 import { todayISO } from '../utility/dates'
-import { stays } from '../utility/content'
+import { useContent } from './useContent'
 
 const storageKey = 'paluma-visit-plan'
 export default function useVisitController() {
+  const { data: stays } = useContent('staying_experiences')
   const [values, setValues] = useState(() => {
     const selected = new URLSearchParams(window.location.search).get('stay')
-    const initial = { name: '', phone: '', email: '', date: '', guests: '2', stay: stays.some(item => item.id === selected) ? selected : 'camping', notes: '' }
+    const initial = { name: '', phone: '', email: '', date: '', guests: '2', stay: selected || 'camping', notes: '' }
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey))
       if (saved && typeof saved === 'object') {
         Object.keys(initial).forEach(key => { if (typeof saved[key] === 'string') initial[key] = saved[key] })
-        if (stays.some(item => item.id === selected)) initial.stay = selected
+        if (selected) initial.stay = selected
       }
     } catch { /* A visit can still be planned when browser storage is unavailable. */ }
     return initial
@@ -25,6 +26,7 @@ export default function useVisitController() {
   }
   function submit(event) {
     event.preventDefault()
+    if (!stays.some(stay => stay.id === values.stay)) { setMessage('Please choose an available stay.'); return }
     if (!values.name.trim()) { setMessage('Please enter your name.'); return }
     if (values.date < todayISO()) { setMessage('Choose today or a future date.'); return }
     try {

@@ -55,6 +55,8 @@ function VideoCard({ video, index }) {
 /** Videos: { id, src, title, description?, poster?, duration?, captions? }. */
 export default function VideoGallery({
   videos = [],
+  loading = false,
+  error = null,
   spacing = 'pt-16 pb-16 md:pt-24 md:pb-24',
   previewImage,
   previewAlt = '',
@@ -114,7 +116,7 @@ export default function VideoGallery({
         {title && <div id={headingId} className="video-gallery-heading page-width text-center [&>div]:justify-center">
           <SectionHeading eyebrow={eyebrow} title={title} description={description} />
         </div>}
-        {availableVideos.length ? (
+        {loading ? <p role="status" className="page-width py-8">Loading videos…</p> : error ? <p role="status" className="page-width py-8">{error}</p> : availableVideos.length ? (
           <ul ref={rowRef} aria-label="Videos from the getaway" className="video-gallery-row">
             {availableVideos.map((video, index) => <VideoCard key={video.id} video={video} index={index} />)}
           </ul>
